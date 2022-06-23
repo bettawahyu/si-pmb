@@ -28,23 +28,30 @@ class DiterimaController extends Controller
 
         $tableData = Diterima::orderByDesc("id")->get();
         $diterima = DB::table('diterima_siswa_yang_diterima_many')->get();
+        $i = 1;
         foreach($diterima as $key => $value){
             $siswa = Pendaftar::where('id', $value->selected_id)->first();
             $kelas = Kelas::where('id',$siswa->kelas)->first();
             $lulus = Diterima::where('id',$value->parent_id)->first();
             $datapendaftar[] = array(
+                'no' => $i,
                 'id' => $siswa->id,
                 'nope' => $siswa->no_pendaftaran,
                 'nama' => $siswa->nama_siswa,
                 'kelas' => $kelas->nama_kelas,
                 'daftarulang' => $lulus->tanggal_daftar_ulang,
                 'batasdaftar' => $lulus->batas_daftar_ulang,
+                'parent_id' => $value->parent_id,
+                'selected_id' => $value->id,
             );
+            $i++;
         }
         if(empty($datapendaftar)){
+            DB::statement("SET foreign_key_checks=0");
+            Diterima::truncate();
+            DB::statement("SET foreign_key_checks=1");
             $datapendaftar = $tableData;
         }
-        // dd($datapendaftar);
         return view("manage.diterima.index")->with(compact('admiko_data', "tableData", 'datapendaftar'));
     }
 
@@ -56,21 +63,15 @@ class DiterimaController extends Controller
         $admiko_data['sideBarActive'] = "diterima";
 		$admiko_data["sideBarActiveFolder"] = "dropdown_pendaftaran";
         $admiko_data['formAction'] = route("manage.diterima.store");
+
         $diterima = DB::table('diterima_siswa_yang_diterima_many')->get();
-        foreach($diterima as $key => $value){
-            $siswa = DB::table('diterima_siswa_yang_diterima_many')
-            ->where('parent', $value->selected_id)
-            ->where();
-            $datapendaftar[] = array(
-                'ids' => $value->selected_id,
-                'parent' => $value->parent_id,
-            );
-        }
-       // dd($datapendaftar);
-        if(!empty($datapendaftar)){
-            $pendaftar_all = Pendaftar::whereNotIn('id',[$datapendaftar])
-            ->whereNotIn
-            ->pluck("nama_siswa", "id");
+        if(!empty($diterima)){
+            $pendaftar_all = DB::table('pendaftar')
+                   //function($cekid) digunakan untuk subquery
+                    ->whereNotIn('id', function($cekid){$cekid->select('selected_id')->from('diterima_siswa_yang_diterima_many');})
+                    ->whereNotIn('id', function($cekid){$cekid->select('selected_id')->from('ditolak_siswa_yang_ditolak_many');})
+                    ->orderBy('nama_siswa')
+                    ->pluck("nama_siswa", "id");
         }else{
             $pendaftar_all = Pendaftar::all()->sortBy("nama_siswa")->pluck("nama_siswa", "id");
         }
@@ -108,7 +109,6 @@ class DiterimaController extends Controller
 
 
 		$pendaftar_all = Pendaftar::all()->sortBy("nama_siswa")->pluck("nama_siswa", "id");
-
         $data = $Diterima;
         return view("manage.diterima.manage")->with(compact('admiko_data', 'data','pendaftar_all'));
     }
@@ -126,13 +126,32 @@ class DiterimaController extends Controller
         return redirect(route("manage.diterima.index"));
     }
 
+    public function MultipleDelete(Request $request)
+    {
+        if (Gate::none(['diterima_allow'])) {
+            return redirect(route("manage.diterima.index"));
+        }
+        $request= $request->all();
+        dd($request);
+        // Diterima::destroy($request->idDel);
+        return back();
+    }
     public function destroy(Request $request)
     {
         if (Gate::none(['diterima_allow'])) {
             return redirect(route("manage.diterima.index"));
         }
-        Diterima::destroy($request->idDel);
-        return back();
+        $request= $request->all();
+        if(!empty($request['selid'])){
+        $cekid = DB::table('diterima_siswa_yang_diterima_many')->whereIn('id', $request['selid'])->distinct()->get('parent_id');
+        foreach($cekid as $key=>$value){
+            $cekid[$key] = $value->parent_id;
+        }
+        DB::table('diterima_siswa_yang_diterima_many')->whereIn('id', $request['selid'])->delete();
+        return back()->with('success', 'Data berhasil dihapus');
+        }else{
+            return back()->with('error', 'Centang kolom yang hendak dihapus!');
+        }
     }
 
 

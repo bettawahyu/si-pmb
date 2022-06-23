@@ -43,7 +43,7 @@
                     </thead>
                     <tbody>
                     @foreach($tableData as $data)
-                        <tr>
+                        <tr >
 							<td class="text-nowrap">{{$data->nama_kelas}}</td>
 							<td class="text-nowrap">{{$data->kapasitas}}</td>
                             <td class="w-5 no-sort"><a href="{{route("manage.kelas.edit",[$data->id])}}"><i class="fas fa-edit fa-fw"></i></a></td>
@@ -91,6 +91,6 @@
         </div>
     </div>
     @endIf
-    
+
 </div>
 @endsection
