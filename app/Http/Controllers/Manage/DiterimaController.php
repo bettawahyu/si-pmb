@@ -67,7 +67,7 @@ class DiterimaController extends Controller
         $diterima = DB::table('diterima_siswa_yang_diterima_many')->get();
         if(!empty($diterima)){
             $pendaftar_all = DB::table('pendaftar')
-                   //function($cekid) digunakan untuk subquery
+                   //function($cekid) digunakan untuk subquery WhereNotIn
                     ->whereNotIn('id', function($cekid){$cekid->select('selected_id')->from('diterima_siswa_yang_diterima_many');})
                     ->whereNotIn('id', function($cekid){$cekid->select('selected_id')->from('ditolak_siswa_yang_ditolak_many');})
                     ->orderBy('nama_siswa')

@@ -1,2 +1,4 @@
 # PMB
- Aplikasi Penerimaan Siswa Baru Untuk TK dan SD SWASTA
+ Aplikasi Penerimaan Siswa Baru Untuk TK dan SD SWASTA. Untuk saat ini masih dalam tahap penyempurnaan dan gratis digunakan.
+
+ Supported by Limakode Software Development

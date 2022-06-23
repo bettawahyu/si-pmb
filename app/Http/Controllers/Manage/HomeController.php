@@ -41,9 +41,6 @@ class HomeController extends Controller
             $i++;
         }
         if(empty($datapendaftar)){
-            DB::statement("SET foreign_key_checks=0");
-            Diterima::truncate();
-            DB::statement("SET foreign_key_checks=1");
             $datapendaftar = $tableData;
         }
         return view('manage.home.index')->with(compact('admiko_data', "tableData", 'datapendaftar','pendaftar','lolos','tolak'));

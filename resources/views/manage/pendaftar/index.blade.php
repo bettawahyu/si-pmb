@@ -12,6 +12,11 @@
 @endsection
 @section('content')
 <div class="card pendaftar_index admikoIndex">
+    @if (\Session::has('error'))
+    <div class="alert alert-danger">
+            <i class="fas fa-times-circle"></i> <span style="font-size:18px"><b>{!! \Session::get('error') !!}</b></span>
+    </div>
+    @endif
     <div class="card-body">
         <div class="tableBox" id="tableBox">
             <div class="row">
@@ -99,6 +104,6 @@
         </div>
     </div>
     @endIf
-    
+
 </div>
 @endsection

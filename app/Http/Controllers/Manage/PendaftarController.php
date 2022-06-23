@@ -11,6 +11,7 @@ use App\Models\Manage\Pendaftar;
 use Illuminate\Http\Request;
 use App\Http\Requests\Manage\PendaftarRequest;
 use Gate;
+use Illuminate\Support\Facades\DB;
 use App\Models\Manage\Agama;
 use App\Models\Manage\JenisKelamin;
 use App\Models\Manage\PekerjaanOrangTua;
@@ -108,8 +109,16 @@ class PendaftarController extends Controller
         if (Gate::none(['pendaftar_allow'])) {
             return redirect(route("manage.pendaftar.index"));
         }
-        Pendaftar::destroy($request->idDel);
-        return back();
+        $diterima = DB::table('diterima_siswa_yang_diterima_many')->where('selected_id', $request->idDel)->get();
+        $ditolak = DB::table('ditolak_siswa_yang_ditolak_many')->where('selected_id', $request->idDel)->get();
+        if($diterima->isEmpty() && $ditolak->isEmpty()){
+            Pendaftar::destroy($request->idDel);
+            return back();
+        }else{
+            return back()->with('error', 'Data tidak dapat dihapus karena data siswa ini sudah diterima/ditolak.');
+        }
+
+
     }
 
 
