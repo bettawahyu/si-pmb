@@ -9,7 +9,7 @@
 <div class="row">
     <div class="col-sm-4">
         <di class="card">
-            <h5 class="card-header" style="background-color: rgb(37, 230, 248); padding:0.3em 2rem; font-size:40px"><i class="fas fa-child fa-fw"></i> Total Pendaftar</h5>
+            <h5 class="card-header" style="background-color: rgb(37, 230, 248); padding:0.3em 2rem; font-size:24px"><i class="fas fa-child fa-fw"></i> Total Pendaftar</h5>
             <div class="card-body"  style="text-align: center">
                 <h2 class="display-2">{{$pendaftar}}</h2>
             </div>
@@ -21,7 +21,7 @@
     </div>
     <div class="col-sm-4">
         <div class="card">
-            <h5 class="card-header" style="background-color: rgb(20, 229, 5); padding:0.3em 2rem; font-size:40px"><i class="fas fa-child fa-fw"></i> Siswa Diterima</h5>
+            <h5 class="card-header" style="background-color: rgb(20, 229, 5); padding:0.3em 2rem; font-size:24px"><i class="fas fa-child fa-fw"></i> Siswa Diterima</h5>
             <div class="card-body"  style="text-align: center">
                 <h2 class="display-2">{{$lolos}}</h2>
             </div>
@@ -32,9 +32,9 @@
     </div>
     <div class="col-sm-4">
         <div class="card">
-            <h5 class="card-header" style="background-color: rgb(255, 71, 71); padding:0.3em 2rem; font-size:40px"><i class="fas fa-child fa-fw"></i> Siswa Ditolak</h5>
+            <h5 class="card-header" style="background-color: rgb(255, 71, 71); padding:0.3em 2rem; font-size:24px"><i class="fas fa-child fa-fw"></i> Siswa Ditolak</h5>
             <div class="card-body"  style="text-align: center">
-                <h2 class="display-2">{{$tolak}}</h2>
+                <h2 class="display-3">{{$tolak}}</h2>
             </div>
             <div class="card-footer text-muted" style="text-align: center;">
                 <h5>SISWA</h5>
@@ -43,7 +43,7 @@
     </div>
     <div class="mt-4 col-md-12">
         <div class="card">
-            <h5 class="card-header" style="background-color: rgb(20, 229, 5); padding:0.3em 2rem; font-size:40px"><i class="fas fa-child fa-fw"></i> Siswa Diterima</h5>
+            <h5 class="card-header" style="background-color: rgb(20, 229, 5); padding:0.3em 2rem; font-size:24px"><i class="fas fa-child fa-fw"></i> Siswa Diterima</h5>
             <div class="card-body">
                 <div class="tableBox" id="tableBox">
                     <div class="row" >
