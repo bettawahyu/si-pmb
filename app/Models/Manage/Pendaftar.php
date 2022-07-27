@@ -24,8 +24,14 @@ class Pendaftar extends Model
     use AdmikoFileUploadTrait,AdmikoAuditableTrait,AdmikoMultiTenantModeTrait,SoftDeletes;
 
     public $table = 'pendaftar';
-    
-    
+
+
+    static $admiko_file_info = [
+		"foto_pendaftar"=>[
+			"original"=>["action"=>"resize","width"=>1024,"height"=>768,"folder"=>"upload/pendaftar/"]
+		]
+	];
+
     protected $dates = [
         'created_at',
         'updated_at',
@@ -40,11 +46,19 @@ class Pendaftar extends Model
 		"agama",
 		"jenis_kelamin",
 		"alamat",
-		"nama_orang_tua",
-		"pekerjaan_orang_tua",
+        "kel_desa",
+        "kecamatan",
+        "kab_kota",
+        "provinsi",
+        "asal_sekolah",
+		"nama_ayah",
+		"pekerjaan_ayah",
+        "nama_ibu",
+		"pekerjaan_ibu",
 		"nomor_telp",
 		"kelas",
 		"tahun_ajaran",
+        "foto_pendaftar"
     ];
     public function getTanggalLahirAttribute($value)
     {
@@ -73,5 +87,17 @@ class Pendaftar extends Model
 	public function tahun_ajaran_id()
     {
         return $this->belongsTo(TahunAjaran::class, 'tahun_ajaran');
+    }
+    public function setFotoPendaftarAttribute()
+    {
+        if (request()->hasFile('foto_pendaftar')) {
+            $this->attributes['foto_pendaftar'] = $this->imageUpload(request()->file("foto_pendaftar"), Pendaftar::$admiko_file_info["foto_pendaftar"], $this->getOriginal('foto_pendaftar'));
+        }
+    }
+    public function setFotoPendaftarAdmikoDeleteAttribute($value)
+    {
+        if (!request()->hasFile('foto_pendaftar') && $value == 1) {
+            $this->attributes['foto_pendaftar'] = $this->imageUpload('', Pendaftar::$admiko_file_info["foto_pendaftar"], $this->getOriginal('foto_pendaftar'), $value);
+        }
     }
 }

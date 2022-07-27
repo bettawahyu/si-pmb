@@ -9,36 +9,18 @@ namespace App\Http\Requests\Manage;
 use Illuminate\Foundation\Http\FormRequest;
 use Response;
 
-class PendaftarRequest extends FormRequest
+class SekolahRequest extends FormRequest
 {
     public function rules()
     {
-        $id = $this->route("pendaftar") ?? null;
+        $id = $this->route("sekolah") ?? null;
 		return [
-            "no_pendaftaran"=>[
+            "nama_sekolah"=>[
 				"string",
-				"unique:pendaftar,no_pendaftaran,".$id.",id,deleted_at,NULL",
+				"unique:sekolah,nama_sekolah,".$id.",id,deleted_at,NULL",
 				"required"
 			],
-			"nama_siswa"=>[
-				"string",
-				"required"
-			],
-			"tempat_lahir"=>[
-				"string",
-				"required"
-			],
-			"tanggal_lahir"=>[
-				'date_format:"'.config('admiko_config.table_date_format').'"',
-				"required"
-			],
-			"agama"=>[
-				"required"
-			],
-			"jenis_kelamin"=>[
-				"required"
-			],
-			"alamat"=>[
+			"alamat_sekolah"=>[
 				"required"
 			],
             "kel_desa"=>[
@@ -53,31 +35,22 @@ class PendaftarRequest extends FormRequest
             "provinsi"=>[
                 "nullable"
             ],
-			"nama_ayah"=>[
+			"akreditasi"=>[
 				"string",
 				"required"
 			],
-			"pekerjaan_ayah"=>[
+            "tahun_akre"=>[
+				"numeric",
 				"required"
 			],
-            "nama_ibu"=>[
+			"telp_sekolah"=>[
 				"string",
 				"required"
 			],
-			"pekerjaan_ibu"=>[
+			"email_sekolah"=>[
 				"required"
 			],
-			"nomor_telp"=>[
-				"string",
-				"required"
-			],
-			"kelas"=>[
-				"required"
-			],
-			"tahun_ajaran"=>[
-				"required"
-            ],
-            "foto_pendaftar"=>[
+			"logo_sekolah"=>[
 				"image",
 				"file_extension:jpg,png,jpeg",
 				"mimes:jpg,png,jpeg",
@@ -88,26 +61,17 @@ class PendaftarRequest extends FormRequest
     public function attributes()
     {
         return [
-            "no_pendaftaran"=>"No. Pendaftaran",
-			"nama_siswa"=>"Nama Siswa",
-			"tempat_lahir"=>"Tempat Lahir",
-			"tanggal_lahir"=>"Tanggal Lahir",
-			"agama"=>"Agama",
-			"jenis_kelamin"=>"Jenis Kelamin",
-			"alamat"=>"Alamat",
+            "nama_sekolah"=>"Nama Sekolah",
+            "alamat_sekolah"=>"Alamat Sekolah",
             "kel_desa"=>"Kelurahan/Desa",
             "kecamatan"=>"Kecamatan",
             "kab_kota"=>"Kabupaten/Kota",
             "provinsi"=>"Provinsi",
-            "asal_sekolah"=>"Asal Sekolah",
-			"nama_ayah"=>"Nama Ayah",
-			"pekerjaan_ayah"=>"Pekerjaan Ayah",
-            "nama_ibu"=>"Nama Ibu",
-			"pekerjaan_ibu"=>"Pekerjaan Ibu",
-			"nomor_telp"=>"Nomor Telp.",
-			"kelas"=>"Kelas",
-			"tahun_ajaran"=>"Tahun Ajaran",
-            "foto_pendaftar"=>"Foto Siswa"
+            "akreditasi"=>"Akreditasi",
+            "tahun_akre"=>"Tahun Akreditasi",
+            "telp_sekolah"=>"Telepon Sekolah",
+            "email_sekolah"=>"Email Sekolah",
+            "logo_sekolah"=>"Logo Sekolah",
         ];
     }
 

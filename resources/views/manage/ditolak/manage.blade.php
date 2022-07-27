@@ -24,7 +24,7 @@
         <div class="card-body">
             @if ($errors->any())<div class="row"><div class="col-2"></div><div class="col"><div class="invalid-feedback d-block">@foreach($errors->all() as $error) {{$error}}<br> @endforeach</div></div></div>@endif
             <div class="row">
-                
+
                 <div class=" col-12">
                     <div class="form-group row multiSelect">
                         <label for="siswa_yang_ditolak" class="col-md-2 col-form-label">Siswa Yang Ditolak:*</label>
@@ -50,16 +50,16 @@
                 </div>
                 <div class=" col-12">
                     <div class="form-group row">
-                        <label for="perubahan_status" class="col-md-2 col-form-label">Perubahan Status:</label>
+                        <label for="status_penolakan" class="col-md-2 col-form-label">Alasan Penolakan:</label>
                         <div class="col-md-10">
-                            <select class="form-select" id="perubahan_status" name="perubahan_status" >
+                            <select class="form-select" id="status_penolakan" name="status_penolakan" >
                                 <option value="">{{trans("admiko.select")}}</option>
-                                @foreach($perubahan_status_all as $id => $value)
-                                    <option value="{{ $id }}" {{ (old('perubahan_status') ? old('perubahan_status') : $data->perubahan_status ?? '') == $id ? 'selected' : '' }}>{{ $value }}</option>
+                                @foreach($status_penolakan_all as $id => $value)
+                                    <option value="{{ $id }}" {{ (old('status_penolakan') ? old('status_penolakan') : $data->status_penolakan ?? '') == $id ? 'selected' : '' }}>{{ $value }}</option>
                                 @endforeach
                             </select>
-                            <div class="invalid-feedback @if ($errors->has('perubahan_status')) d-block @endif">{{trans('admiko.required_text')}}</div>
-                            <small id="perubahan_status_help" class="text-muted"></small>
+                            <div class="invalid-feedback @if ($errors->has('status_penolakan')) d-block @endif">{{trans('admiko.required_text')}}</div>
+                            <small id="status_penolakan_help" class="text-muted"></small>
                         </div>
                     </div>
                 </div>

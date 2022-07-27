@@ -11,7 +11,7 @@
  */
 return [
     'home'                               => 'Home',
-    'myaccount'                          => 'My Account',
+    'myaccount'                          => 'Account Profile',
     'logout'                             => 'Sign out',
     'login'                              => 'Login',
     'username'                           => 'Email',
@@ -67,9 +67,9 @@ return [
     'parent_title'                       => 'Parent',
     'parent_child'                       => 'Child',
     /*Developer Tools*/
-    'developer_tools'                    => 'Developer Tools',
+    'developer_tools'                    => 'Users Management',
     'developer_page_import'              => 'Page Import',
-    'developer_users'                    => 'Admin Users',
+    'developer_users'                    => 'Add Users and Roles',
     'developer_logs'                     => 'Auditable Logs',
     /*admins*/
     'admins_title'                       => 'Admin Users',

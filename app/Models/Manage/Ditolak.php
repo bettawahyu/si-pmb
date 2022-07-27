@@ -18,9 +18,9 @@ class Ditolak extends Model
     use AdmikoFileUploadTrait,AdmikoAuditableTrait,AdmikoMultiTenantModeTrait,SoftDeletes;
 
     public $table = 'ditolak';
-    
-    
-	const PERUBAHAN_STATUS_CONS = ["diterimacdg"=>"Diterima Cadangan","bersyaratcdg"=>"Diterima dengan Syarat Cadangan","ditimbangcdg"=>"Diterima dengan Pertimbangan Cadangan"];
+
+
+	const STATUS_PENOLAKAN_CONS = ["kurang"=>"Dokumen Tidak Lengkap","absah"=>"Kurang Memenuhi Syarat","kuota"=>"Kuota Penuh"];
     protected $dates = [
         'created_at',
         'updated_at',
@@ -28,7 +28,7 @@ class Ditolak extends Model
     ];
 
     protected $fillable = [
-		"perubahan_status",
+		"status_penolakan",
     ];
     public function siswa_yang_ditolak_many()
     {

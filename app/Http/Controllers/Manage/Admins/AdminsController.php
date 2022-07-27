@@ -22,7 +22,7 @@ class AdminsController extends Controller
             return redirect(route("manage.home"));
         }
         $admiko_data['sideBarActive'] = "admikoAdmins";
-        $admiko_data['sideBarActiveFolder'] = "";
+        $admiko_data['sideBarActiveFolder'] = "dropdown_settings";
         $tableData = Admins::all()->load('AdminsRole');
         return view("manage.admins.index")->with(compact('admiko_data', "tableData"));
     }
@@ -33,7 +33,7 @@ class AdminsController extends Controller
             return redirect(route("manage.home"));
         }
         $admiko_data['sideBarActive'] = "admikoAdmins";
-        $admiko_data['sideBarActiveFolder'] = "";
+        $admiko_data['sideBarActiveFolder'] = "dropdown_settings";
         $admiko_data['formAction'] = route("manage.admins.store");
         $themes = Storage::disk('admiko_api_import')->directories('public/assets/admiko/css/theme');
         $themes = array_map('basename', $themes);
@@ -69,7 +69,7 @@ class AdminsController extends Controller
             return redirect(route("manage.home"));
         }
         $admiko_data['sideBarActive'] = "admikoAdmins";
-        $admiko_data['sideBarActiveFolder'] = "";
+        $admiko_data['sideBarActiveFolder'] = "dropdown_settings";
         $admiko_data['formAction'] = route("manage.admins.update", $Admins->id);
         if ($Admins->id == 1) {
             $role_all = AdminRoles::where('id', 1)->pluck("title", "id")->sortBy("title");

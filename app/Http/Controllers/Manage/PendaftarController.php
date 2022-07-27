@@ -28,6 +28,7 @@ class PendaftarController extends Controller
         }
         $admiko_data['sideBarActive'] = "pendaftar";
 		$admiko_data["sideBarActiveFolder"] = "dropdown_pendaftaran";
+        $admiko_data["fileInfo"] = Pendaftar::$admiko_file_info;
 
         $tableData = Pendaftar::orderByDesc("id")->get();
         return view("manage.pendaftar.index")->with(compact('admiko_data', "tableData"));
@@ -41,6 +42,7 @@ class PendaftarController extends Controller
         $admiko_data['sideBarActive'] = "pendaftar";
 		$admiko_data["sideBarActiveFolder"] = "dropdown_pendaftaran";
         $admiko_data['formAction'] = route("manage.pendaftar.store");
+        $admiko_data["fileInfo"] = Pendaftar::$admiko_file_info;
 
 
         $urut = Pendaftar::count();
@@ -81,6 +83,7 @@ class PendaftarController extends Controller
         $admiko_data['sideBarActive'] = "pendaftar";
 		$admiko_data["sideBarActiveFolder"] = "dropdown_pendaftaran";
         $admiko_data['formAction'] = route("manage.pendaftar.update", [$Pendaftar->id]);
+        $admiko_data["fileInfo"] = Pendaftar::$admiko_file_info;
 
 
 		$agama_all = Agama::all()->sortBy("nama_agama")->pluck("nama_agama", "id");

@@ -1,9 +1,9 @@
 @extends("manage.layouts.default")
 @section('breadcrumbs')
-<li class="breadcrumb-item active" aria-current="page">Ditolak</li>
+<li class="breadcrumb-item active" aria-current="page">Pendaftar</li>
 @endsection
 @section('pageTitle')
-<h1>Ditolak</h1>
+<h1>Pendaftar</h1>
 @endsection
 @section('pageInfo')
 @endsection
@@ -11,16 +11,13 @@
 <a href="{{route("manage.home")}}"><i class="fas fa-angle-left"></i> {{trans('admiko.page_back_btn')}}</a>
 @endsection
 @section('content')
-<div class="card ditolak_index admikoIndex">
+<div class="card pendaftar_index admikoIndex">
+    @if (\Session::has('error'))
+    <div class="alert alert-danger">
+            <i class="fas fa-times-circle"></i> <span style="font-size:18px"><b>{!! \Session::get('error') !!}</b></span>
+    </div>
+    @endif
     <div class="card-body">
-        @if (\Session::has('success'))
-        <meta http-equiv="refresh" content="0">
-        @elseif (\Session::has('error'))
-        <div class="alert alert-danger">
-                <i class="fas fa-times-circle"></i> <span style="font-size:18px"><b>{!! \Session::get('error') !!}</b></span>
-        </div>
-        @else
-        @endif
         <div class="tableBox" id="tableBox">
             <div class="row">
                 <div class="col-12 d-flex justify-content-between">
@@ -38,60 +35,59 @@
                 </div>
             </div>
             <div class="tableLayout pb-2">
-            <form method="post" class="w-100" action="{{route("manage.ditolak.delete")}}">
-                @method('DELETE')
-                @csrf
-                <table class="table tableSort" style="width:100%" data-dom="ltrip">
+                                <table class="table tableSort" style="width:100%" data-dom="ltrip">
                     <thead>
                         <tr data-sort-method='thead'>
-                            <th scope="col"># Urut</th>
-                            <th scope="col">No. Pendaftar</th>
-							<th scope="col">Nama Siswa</th>
-                            <th scope="col">Kelas</th>
-                            <th scope="col">Tanggal Daftar</th>
-                            <th scope="col">Alasan Penolakan</th>
-                            <th scope="col" class="w-5 no-sort sorting_disabled" data-orderable="false" rowspan="1" colspan="1" style="width: 120px;" aria-label="Delete"><span style="color: red; font-size:14px"><b>Pilih untuk Hapus</b></span></th>
+							<th scope="col" class="text-nowrap">No. Pendaftaran</th>
+							<th scope="col" class="text-nowrap">Nama Siswa</th>
+							<th scope="col" class="d-none d-sm-table-cell">Alamat</th>
+							<th scope="col" class="text-nowrap d-none d-md-table-cell">Nomor Telp.</th>
+							<th scope="col" class="text-nowrap d-none d-lg-table-cell">Kelas</th>
+							<th scope="col" class="text-nowrap d-none d-lg-table-cell">Jenis Kelamin</th>
+                            <th scope="col" class="w-5 no-sort" data-orderable="false">{{trans("admiko.table_edit")}}</th>
+                            @if(Gate::allows('pendaftar_allow'))
+                            <th scope="col" class="w-5 no-sort" data-orderable="false">{{trans('admiko.table_delete')}}</th>
+                            @endIf
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($dataditolak as $data)
-                        <tr id="tr_{{$data['selected_id']}}">
-                            <td>{{$data['no']}}</td>
-                            <td>{{$data['nope']}}</td>
-							<td>{{$data['nama']}}</td>
-                            <td>{{$data['kelas']}}</td>
-                            <td>{{\Carbon\Carbon::parse($data['gagal'])->format('d M Y')}}</td>
-                            <td>
-                            @foreach($status_penolakan_all as $id => $value)
-                                @if($data['status'] == $id)
-                                    {{$value}}
-                                @endif
-                            @endforeach
-                            </td>
-                            <td class="w5 no-sort" style="align-content: center"><input type="checkbox" id="selid" name="selid[]" value="{{$data['selected_id']}}"></td>
+                    @foreach($tableData as $data)
+                        <tr>
+							<td class="text-nowrap">{{$data->no_pendaftaran}}</td>
+							<td class="text-nowrap">{{$data->nama_siswa}}</td>
+							<td class="d-none d-sm-table-cell">{!!Str::limit(strip_tags($data["alamat"]), 50, "...")!!}</td>
+							<td class="text-nowrap d-none d-md-table-cell">{{$data->nomor_telp}}</td>
+							<td class="text-nowrap d-none d-lg-table-cell">{{$data->kelas_id->nama_kelas??""}}</td>
+							<td class="text-nowrap d-none d-lg-table-cell">{{$data->jenis_kelamin_id->jenis_kelamin??""}}</td>
+                            <td class="w-5 no-sort"><a href="{{route("manage.pendaftar.edit",[$data->id])}}"><i class="fas fa-edit fa-fw"></i></a></td>
+                            @if(Gate::allows(['pendaftar_allow']))
+                            <td class="w-5 no-sort">
+                            <a href="#" data-id="{{$data->id}}" class="admiko_deleteConfirm" data-bs-toggle="modal" data-bs-target="#deleteConfirm"><i class="fas fa-trash fa-fw"></i></a>
+                        </td>
+                            @endIf
                         </tr>
                     @endforeach
                     </tbody>
-            </table>
+                </table>
             </div>
             <div class="row">
                 <div class="col-12 col-sm order-3 order-sm-0 pt-2">
-                    @if(Gate::any(['ditolak_allow']))
-                        <a href="{{route('manage.ditolak.create')}}" class="btn btn-success" role="button"><i class="fas fa-plus fa-fw"></i> {{trans('admiko.table_add')}}</a>
-                        @if(isset($data))
-                        <a href="#" data-id="tr_{{$data['selected_id']}}" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirm" role="button"><i class="fas fa-trash fa-fw"></i> {{trans('admiko.table_delete')}}</a>
-                        @endif
-                     @endIf
+                    @if(Gate::any(['pendaftar_allow']))
+                        <a href="{{route('manage.pendaftar.create')}}" class="btn btn-primary" role="button"><i class="fas fa-plus fa-fw"></i> {{trans('admiko.table_add')}}</a>
+                    @endIf
                 </div>
                 <div class="col-12 col-sm-auto order-0 order-sm-3 pt-2 align-self-center paginationInfo"></div>
                 <div class="col-12 col-sm-auto order-0 order-sm-3 pt-2 text-end paginationBox"></div>
             </div>
         </div>
     </div>
-    @if(Gate::allows('ditolak_allow'))
+    @if(Gate::allows('pendaftar_allow'))
     <!-- Delete confirm -->
     <div class="modal fade" id="deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="deleteConfirm" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
+            <form method="post" class="w-100" action="{{route("manage.pendaftar.delete")}}">
+            @method('DELETE')
+            @csrf
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">{{trans('admiko.delete_confirm')}}</h5>

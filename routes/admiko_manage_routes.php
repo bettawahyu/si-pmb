@@ -13,6 +13,9 @@ Route::resource("diterima", DiterimaController::class)->parameters(["diterima" =
 /**Ditolak**/
 Route::delete("ditolak/destroy", [DitolakController::class,"destroy"])->name("ditolak.delete");
 Route::resource("ditolak", DitolakController::class)->parameters(["ditolak" => "ditolak"]);
+/**Sekolah**/
+// Route::delete("sekolah/destroy", [SekolahController::class,"destroy"])->name("sekolah.delete");
+Route::resource("sekolah", SekolahController::class)->parameters(["sekolah" => "sekolah"]);
 /**Agama**/
 Route::delete("agama/destroy", [AgamaController::class,"destroy"])->name("agama.delete");
 Route::resource("agama", AgamaController::class)->parameters(["agama" => "agama"]);

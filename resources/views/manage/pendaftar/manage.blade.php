@@ -119,7 +119,7 @@
                 </div>
                 <div class=" col-12">
                     <div class="form-group row">
-                        <label for="alamat" class="col-md-2 col-form-label">Alamat:*</label>
+                        <label for="alamat" class="col-md-2 col-form-label">Alamat Rumah:*</label>
                         <div class="col-md-10">
                             <textarea class="form-control form-control-textarea " id="alamat" name="alamat" required="true" placeholder="Alamat">{{{ old('alamat', isset($data)?$data->alamat : '') }}}</textarea>
                             <div class="invalid-feedback @if ($errors->has('alamat')) d-block @endif">{{trans('admiko.required_text')}}</div>
@@ -127,35 +127,90 @@
                         </div>
                     </div>
                 </div>
+                <div class=" col-lg-6">
+                    <div class="form-group row">
+                        <label for="kel_desa" class="col-md-2 col-lg-4 col-form-label">Kelurahan/Desa:*</label>
+                        <div class="col-md-10 col-lg-8">
+                            <input type="text" class="form-control" id="kel_desa" name="kel_desa" required="true" placeholder="Kelurahan/Desa"  value="{{{ old('kel_desa', isset($data)?$data->kel_desa : '') }}}">
+                            <div class="invalid-feedback @if ($errors->has('kel_desa')) d-block @endif">{{trans('admiko.required_text')}}</div>
+                            <small id="kel_desa_help" class="text-muted"></small>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-lg-6">
+                    <div class="form-group row">
+                        <label for="kecamatan" class="col-md-2 col-lg-4 col-form-label">Kecamatan:*</label>
+                        <div class="col-md-10 col-lg-8">
+                            <input type="text" class="form-control" id="kecamatan" name="kecamatan" required="true" placeholder="Kecamatan"  value="{{{ old('kecamatan', isset($data)?$data->kecamatan : '') }}}">
+                            <div class="invalid-feedback @if ($errors->has('kecamatan')) d-block @endif">{{trans('admiko.required_text')}}</div>
+                            <small id="kecamatan_help" class="text-muted"></small>
+                        </div>
+                    </div>
+                </div>
                 <div class=" col-12">
                     <div class="form-group row">
-                        <label for="nama_orang_tua" class="col-md-2 col-form-label">Nama Orang Tua:*</label>
+                        <label for="asal_sekolah" class="col-md-2 col-form-label">Asal Sekolah:*</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" id="nama_orang_tua" name="nama_orang_tua" required="true" placeholder="Nama Orang Tua"  value="{{{ old('nama_orang_tua', isset($data)?$data->nama_orang_tua : '') }}}">
-                            <div class="invalid-feedback @if ($errors->has('nama_orang_tua')) d-block @endif">{{trans('admiko.required_text')}}</div>
-                            <small id="nama_orang_tua_help" class="text-muted"></small>
+                            <input type="text" class="form-control" id="asal_sekolah" name="asal_sekolah" required="true" placeholder="Asal Sekolah"  value="{{{ old('asal_sekolah', isset($data)?$data->asal_sekolah : '') }}}">
+                            <div class="invalid-feedback @if ($errors->has('asal_sekolah')) d-block @endif">{{trans('admiko.required_text')}}</div>
+                            <small id="asal_sekolah_help" class="text-muted"></small>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-12"><hr></div>
+                <div class=" col-12">
+                    <div class="form-group row">
+                        <label for="nama_ayah" class="col-md-2 col-form-label">Nama Ayah:*</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="nama_ayah" name="nama_ayah" required="true" placeholder="Nama Ayah"  value="{{{ old('nama_ayah', isset($data)?$data->nama_ayah : '') }}}">
+                            <div class="invalid-feedback @if ($errors->has('nama_ayah')) d-block @endif">{{trans('admiko.required_text')}}</div>
+                            <small id="nama_ayah_help" class="text-muted"></small>
                         </div>
                     </div>
                 </div>
                 <div class=" col-12">
                     <div class="form-group row multiSelect">
-                        <label for="pekerjaan_orang_tua" class="col-md-2 col-form-label">Pekerjaan Orang Tua:*</label>
+                        <label for="pekerjaan_ayah" class="col-md-2 col-form-label">Pekerjaan Ayah:*</label>
                         <div class="col-md-10" style="position: relative">
-                            <select class="form-select" id="pekerjaan_orang_tua" name="pekerjaan_orang_tua" required="true" data-placeholder="{{trans('admiko.select')}}" style="width: 100%" data-width="100%" data-allow-clear="true">
+                            <select class="form-select" id="pekerjaan_ayah" name="pekerjaan_ayah" required="true" data-placeholder="{{trans('admiko.select')}}" style="width: 100%" data-width="100%" data-allow-clear="true">
 
                                 @foreach($pekerjaan_orang_tua_all as $id => $value)
-                                    <option value="{{ $id }}" {{ (old('pekerjaan_orang_tua') ? old('pekerjaan_orang_tua') : $data->pekerjaan_orang_tua ?? '') == $id ? 'selected' : '' }}>{{ $value }}</option>
+                                    <option value="{{ $id }}" {{ (old('pekerjaan_ayah') ? old('pekerjaan_ayah') : $data->pekerjaan_ayah ?? '') == $id ? 'selected' : '' }}>{{ $value }}</option>
                                 @endforeach
                             </select>
-                            <div class="invalid-feedback @if ($errors->has('pekerjaan_orang_tua')) d-block @endif">{{trans('admiko.required_text')}}</div>
-                            <small id="pekerjaan_orang_tua_help" class="text-muted"></small>
+                            <div class="invalid-feedback @if ($errors->has('pekerjaan_ayah')) d-block @endif">{{trans('admiko.required_text')}}</div>
+                            <small id="pekerjaan_ayah_help" class="text-muted"></small>
                         </div>
                     </div>
                 </div>
-
                 <div class=" col-12">
                     <div class="form-group row">
-                        <label for="nomor_telp" class="col-md-2 col-form-label">Nomor Telp.:*</label>
+                        <label for="nama_ibu" class="col-md-2 col-form-label">Nama Ibu:*</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="nama_ibu" name="nama_ibu" required="true" placeholder="Nama Ibu"  value="{{{ old('nama_ibu', isset($data)?$data->nama_ibu : '') }}}">
+                            <div class="invalid-feedback @if ($errors->has('nama_ibu')) d-block @endif">{{trans('admiko.required_text')}}</div>
+                            <small id="nama_ibu_help" class="text-muted"></small>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-12">
+                    <div class="form-group row multiSelect">
+                        <label for="pekerjaan_ibu" class="col-md-2 col-form-label">Pekerjaan Ibu:*</label>
+                        <div class="col-md-10" style="position: relative">
+                            <select class="form-select" id="pekerjaan_ibu" name="pekerjaan_ibu" required="true" data-placeholder="{{trans('admiko.select')}}" style="width: 100%" data-width="100%" data-allow-clear="true">
+
+                                @foreach($pekerjaan_orang_tua_all as $id => $value)
+                                    <option value="{{ $id }}" {{ (old('pekerjaan_ibu') ? old('pekerjaan_ibu') : $data->pekerjaan_ibu ?? '') == $id ? 'selected' : '' }}>{{ $value }}</option>
+                                @endforeach
+                            </select>
+                            <div class="invalid-feedback @if ($errors->has('pekerjaan_ibu')) d-block @endif">{{trans('admiko.required_text')}}</div>
+                            <small id="pekerjaan_ibu_help" class="text-muted"></small>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-12">
+                    <div class="form-group row">
+                        <label for="nomor_telp" class="col-md-2 col-form-label">Nomor Telp. Ortu:*</label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" id="nomor_telp" name="nomor_telp" required="true" placeholder="Nomor Telp."  value="{{{ old('nomor_telp', isset($data)?$data->nomor_telp : '') }}}">
                             <div class="invalid-feedback @if ($errors->has('nomor_telp')) d-block @endif">{{trans('admiko.required_text')}}</div>
@@ -165,7 +220,7 @@
                 </div>
                 <div class=" col-lg-6">
                     <div class="form-group row">
-                        <label for="kelas" class="col-md-2 col-lg-4 col-form-label">Kelas:*</label>
+                        <label for="kelas" class="col-md-2 col-lg-4 col-form-label">Kelas Pilihan:*</label>
                         <div class="col-md-10 col-lg-8">
                             <select class="form-select" id="kelas" name="kelas" required="true">
 
@@ -194,7 +249,28 @@
                         </div>
                     </div>
                 </div>
-
+                <div class=" col-12">
+                    <div class="form-group row">
+                        <label for="foto_pendaftar" class="col-md-2 col-form-label">Foto Pendaftar:</label>
+                        <div class="col-md-10">
+                            @if (isset($data->foto_pendaftar) && Storage::disk(config("admiko_config.filesystem"))->exists($admiko_data['fileInfo']["foto_pendaftar"]['original']["folder"].$data->foto_pendaftar))
+                            <a href="{{ Storage::disk(config("admiko_config.filesystem"))->url($admiko_data['fileInfo']["foto_pendaftar"]['original']["folder"].$data->foto_pendaftar) }}" target="_blank" class="tableImage">
+                                    <img src="{{ Storage::disk(config("admiko_config.filesystem"))->url($admiko_data['fileInfo']["foto_pendaftar"]['original']["folder"].$data->foto_pendaftar) }}">
+                                </a><br>
+                                <div class="form-check form-checkbox">
+                                <input class="form-check-input" type="checkbox" name="foto_pendaftar_admiko_delete" id="foto_pendaftar_admiko_delete" value="1">
+                                <label class="form-check-label" for="foto_pendaftar_admiko_delete"> {{trans('admiko.remove_file')}}</label>
+                            </div>
+                            @endif
+                            <input type="file" class="imageUpload mt-1" id="foto_pendaftar" accept=".jpg,.png,.jpeg" data-type=".jpg,.png,.jpeg"  name="foto_pendaftar"  data-selected="{{trans('admiko.selected_image_preview')}}" >
+                            <input type="hidden" id="foto_pendaftar_admiko_current" name="foto_pendaftar_admiko_current" value="{{$data->foto_pendaftar??''}}">
+                            <div class="invalid-feedback @if ($errors->has('foto_pendaftar')) d-block @endif" data-required="{{trans('admiko.required_image')}}" data-size="{{trans('admiko.required_size')}}" data-type="{{trans('admiko.required_type')}}">
+                                @if ($errors->has('foto_pendaftar')){{ $errors->first('foto_pendaftar') }}@endif
+                            </div>
+                            <small id="foto_pendaftar_help" class="text-muted">{{trans("admiko.file_extension_limit")}}.jpg,.png,.jpeg. {{trans("admiko.recommended")}}{{trans("admiko.width")}}1024px, {{trans("admiko.height")}}768px. {{trans("admiko.image_action")}}{{trans("admiko.image_action_resize")}}.</small>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="card-footer form-actions" id="form-group-buttons">

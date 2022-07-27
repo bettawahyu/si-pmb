@@ -39,6 +39,7 @@ class DitolakController extends Controller
                 'nope' => $siswa->no_pendaftaran,
                 'nama' => $siswa->nama_siswa,
                 'kelas' => $kelas->nama_kelas,
+                'status' => $lulus->status_penolakan,
                 'gagal' => $lulus->created_at,
                 'parent_id' => $value->parent_id,
                 'selected_id' => $value->id,
@@ -51,7 +52,8 @@ class DitolakController extends Controller
             DB::statement("SET foreign_key_checks=1");
             $dataditolak = $tableData;
         }
-        return view("manage.ditolak.index")->with(compact('admiko_data', "tableData",'dataditolak'));
+        $status_penolakan_all = Ditolak::STATUS_PENOLAKAN_CONS;
+        return view("manage.ditolak.index")->with(compact('admiko_data', "tableData",'dataditolak','status_penolakan_all'));
     }
 
     public function create()
@@ -74,8 +76,8 @@ class DitolakController extends Controller
         }else{
             $pendaftar_all = Pendaftar::all()->sortBy("nama_siswa")->pluck("nama_siswa", "id");
         }
-		$perubahan_status_all = Ditolak::PERUBAHAN_STATUS_CONS;
-        return view("manage.ditolak.manage")->with(compact('admiko_data','pendaftar_all','perubahan_status_all'));
+		$status_penolakan_all = Ditolak::STATUS_PENOLAKAN_CONS;
+        return view("manage.ditolak.manage")->with(compact('admiko_data','pendaftar_all','status_penolakan_all'));
     }
 
     public function store(DitolakRequest $request)

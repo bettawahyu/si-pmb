@@ -39,13 +39,6 @@
                     @include('manage.admiko_sidebar')
                     {{--!!! To prevent overwriting please add your links into custom_sidebar!!!--}}
                     @include('manage.custom_sidebar_bottom')
-
-                    <li class="nav-item myaccount{{ $admiko_data['sideBarActive'] === "myaccount" ? " active" : "" }}">
-                        <a class="nav-link" href="{{route("manage.myaccount")}}"><i class="fas fa-user fa-fw"></i>{{ trans('admiko.myaccount') }}</a>
-                    </li>
-                    <li class="nav-item logout">
-                        <a class="nav-link" href="{{route("manage.logout")}}"><i class="fas fa-power-off fa-fw"></i>{{ trans('admiko.logout') }}</a>
-                    </li>
                     @include('manage.layouts.admiko_developer_sidebar')
                 </ul>
             </div>

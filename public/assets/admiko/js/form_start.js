@@ -59,7 +59,7 @@ function datePicker() {
         }
         $(id).datetimepicker({
             format: dateFormat,
-            defaultDate: date,
+            // defaultDate: new Date().setFullYear(new Date().getFullYear() - 6),
             icons: {
                 time: 'far fa-clock',
             }
@@ -77,7 +77,7 @@ function datePicker() {
         }
         $(id).datetimepicker({
             format: dateFormat,
-            defaultDate: date
+            defaultDate: new Date().setFullYear(new Date().getFullYear() - 6),
         });
     })
     $('.timePicker').each(function () {
@@ -93,7 +93,7 @@ function datePicker() {
 
         $(id).datetimepicker({
             format: timeFormat,
-            defaultDate: date
+            defaultDate: new Date().setFullYear(new Date().getFullYear() - 6),
         });
     })
 }

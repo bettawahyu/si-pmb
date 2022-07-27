@@ -20,6 +20,14 @@
 <li class="nav-item dropdown{{ $admiko_data['sideBarActiveFolder'] === "dropdown_settings" ? " open" : "" }}">
     <a href="#" class="nav-link dropdown-link"><i class="fas fa-tools fa-fw"></i>Settings</a>
     <ul class="nav flex-column dropdown-content" {!! $admiko_data['sideBarActiveFolder'] === "dropdown_settings" ? ' style="display:block"' : '' !!}>
+        <li class="nav-item">
+            <div class="menu-title">
+                <div>Apps Configuration</div>
+            </div>
+        </li>
+    @if(Gate::any(['sekolah_allow', 'sekolah_edit']))
+		<li class="nav-item{{ $admiko_data['sideBarActive'] === "sekolah" ? " active" : "" }}"><a class="nav-link dropdown-item" href="{{route('manage.sekolah.index')}}"><i class="fas fa-school fa-fw"></i>Data Sekolah</a></li>
+	@endIf
 	@if(Gate::any(['agama_allow', 'agama_edit']))
 		<li class="nav-item{{ $admiko_data['sideBarActive'] === "agama" ? " active" : "" }}"><a class="nav-link dropdown-item" href="{{route('manage.agama.index')}}"><i class="fas fa-mosque fa-fw"></i>Agama</a></li>
 	@endIf
@@ -38,6 +46,7 @@
 	@if(Gate::any(['unggah_dokumen_allow', 'unggah_dokumen_edit']))
 		<li class="nav-item{{ $admiko_data['sideBarActive'] === "unggah_dokumen" ? " active" : "" }}"><a class="nav-link dropdown-item" href="{{route('manage.unggah_dokumen.index')}}"><i class="fas fa-paper-plane fa-fw"></i>Unggah Dokumen</a></li>
 	@endIf
-    </ul>
+    </
+ul>
 </li>
 @endIf

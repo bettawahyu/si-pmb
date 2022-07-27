@@ -18,7 +18,7 @@ class MyAccountController extends Controller
     public function index()
     {
         $admiko_data['sideBarActive'] = "myaccount";
-        $admiko_data['sideBarActiveFolder'] = "";
+        $admiko_data['sideBarActiveFolder'] = "dropdown_settings";
         $data = auth()->user();
         $themes = Storage::disk('admiko_api_import')->directories('public/assets/admiko/css/theme');
         $themes = array_map('basename', $themes);
