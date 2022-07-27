@@ -28,6 +28,9 @@
     @if(Gate::any(['sekolah_allow', 'sekolah_edit']))
 		<li class="nav-item{{ $admiko_data['sideBarActive'] === "sekolah" ? " active" : "" }}"><a class="nav-link dropdown-item" href="{{route('manage.sekolah.index')}}"><i class="fas fa-school fa-fw"></i>Data Sekolah</a></li>
 	@endIf
+    	@if(Gate::any(['menu_allow', 'menu_edit']))
+		<li class="nav-item{{ $admiko_data['sideBarActive'] === "menu" ? " active" : "" }}"><a class="nav-link dropdown-item" href="{{route('manage.menu.index')}}"><i class="fas fa-list fa-fw"></i>Menu</a></li>
+	@endIf
 	@if(Gate::any(['agama_allow', 'agama_edit']))
 		<li class="nav-item{{ $admiko_data['sideBarActive'] === "agama" ? " active" : "" }}"><a class="nav-link dropdown-item" href="{{route('manage.agama.index')}}"><i class="fas fa-mosque fa-fw"></i>Agama</a></li>
 	@endIf

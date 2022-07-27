@@ -58,7 +58,7 @@ class SekolahController extends Controller
 
         $sekolah = Sekolah::create($data);
 
-        return redirect(route("manage.sekolah.manage"));
+        return redirect(route("manage.sekolah.index"));
     }
 
     public function show($id)

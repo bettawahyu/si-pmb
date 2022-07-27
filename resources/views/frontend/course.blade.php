@@ -1,9 +1,9 @@
 
-<div class="site-section courses-title" id="courses-section">
+<div class="site-section courses-title" id="{{$Tentang->slug}}-section">
     <div class="container">
       <div class="row mb-5 justify-content-center">
         <div class="col-lg-7 text-center" data-aos="fade-up" data-aos-delay="">
-          <h2 class="section-title">Courses</h2>
+          <h2 class="section-title">{{$Tentang->nama_menu}} Kami</h2>
         </div>
       </div>
     </div>
