@@ -24,6 +24,7 @@ class MenuController extends Controller
 		$admiko_data["sideBarActiveFolder"] = "dropdown_settings";
 
         $tableData = Menu::orderBy("id")->get();
+
         return view("manage.menu.index")->with(compact('admiko_data', "tableData"));
     }
 
@@ -36,8 +37,8 @@ class MenuController extends Controller
 		$admiko_data["sideBarActiveFolder"] = "dropdown_settings";
         $admiko_data['formAction'] = route("manage.menu.store");
 
-
-        return view("manage.menu.manage")->with(compact('admiko_data'));
+        $aktif_all = Menu::AKTIF_CONS;
+        return view("manage.menu.manage")->with(compact('admiko_data','aktif_all'));
     }
 
     public function store(MenuRequest $request)
@@ -68,9 +69,9 @@ class MenuController extends Controller
 		$admiko_data["sideBarActiveFolder"] = "dropdown_settings";
         $admiko_data['formAction'] = route("manage.menu.update", [$Menu->id]);
 
-
+        $aktif_all = Menu::AKTIF_CONS;
         $data = $Menu;
-        return view("manage.menu.manage")->with(compact('admiko_data', 'data'));
+        return view("manage.menu.manage")->with(compact('admiko_data', 'data','aktif_all'));
     }
 
     public function update(MenuRequest $request,$id)

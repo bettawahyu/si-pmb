@@ -18,7 +18,7 @@ class Menu extends Model
 
     public $table = 'menu';
 
-
+    const AKTIF_CONS = ["1"=>"Aktif","0"=>"Non Aktif"];
     protected $dates = [
         'created_at',
         'updated_at',
@@ -28,6 +28,7 @@ class Menu extends Model
     protected $fillable = [
 		"nama_menu",
         "slug",
+        "aktif",
     ];
 
 }

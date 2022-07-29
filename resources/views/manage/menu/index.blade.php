@@ -36,6 +36,7 @@
 							<th scope="col" class="w-5" data-sort-method="number" >ID</th>
 							<th scope="col" class="text-nowrap">Nama Menu</th>
                             <th scope="col" class="text-nowrap">Slug</th>
+                            <th scope="col" class="text-nowrap">Status</th>
                             <th scope="col" class="w-5 no-sort" data-orderable="false">{{trans("admiko.table_edit")}}</th>
                             @if(Gate::allows('menu_allow'))
                             <th scope="col" class="w-5 no-sort" data-orderable="false">{{trans('admiko.table_delete')}}</th>
@@ -48,6 +49,13 @@
 							<td class="w-5"><a href="{{route("manage.menu.edit",[$data->id])}}">{{$data->id}}</a></td>
 							<td class="text-nowrap">{{$data->nama_menu}}</td>
                             <td class="text-nowrap">{{$data->slug}}</td>
+                            <td class="text-nowrap">
+                                @if ($data->aktif == 1)
+                                    Aktif
+                                @else
+                                    Tidak Aktif
+                                @endif
+                            </td>
                             <td class="w-5 no-sort"><a href="{{route("manage.menu.edit",[$data->id])}}"><i class="fas fa-edit fa-fw"></i></a></td>
                             @if(Gate::allows(['menu_allow']))
                             <td class="w-5 no-sort">

@@ -45,6 +45,31 @@
                         </div>
                     </div>
                 </div>
+                <div class=" col-12">
+                    <div class="form-group row">
+                        <label class="col-form-label col-md-2">Status Aktif:</label>
+                        <div class="col-md-10">
+                            <div class="row pt-2">
+                            @foreach($aktif_all as $id => $value)
+                                @php $checked = ""; @endphp
+                                @if(old('aktif') == $id)
+                                    @php $checked = "checked"; @endphp
+                                @elseIf(isset($data) && $data->aktif == $id)
+                                    @php $checked = "checked"; @endphp
+                                @endIf
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input type="radio" class="form-check-input" name="aktif" id="aktif{{ $id }}" value="{{ $id }}" {{$checked}} >
+                                        <label class="form-check-label" for="aktif{{ $id }}">{{ $value }}</label>
+                                    </div>
+                                </div>
+                            @endforeach
+                            </div>
+                            <div class="invalid-feedback @if ($errors->has('aktif')) d-block @endif">{{trans('admiko.required_text')}}</div>
+                            <small id="aktif_help" class="text-muted"></small>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="card-footer form-actions" id="form-group-buttons">
