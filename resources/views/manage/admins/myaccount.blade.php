@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="image" class="col-sm-2 col-form-label">Image:</label>
+                    <label for="image" class="col-sm-2 col-form-label">{{trans('global.image')}}:</label>
                     <div class="col-sm-10">
                         @if (isset($data->image))
                             <img class="stored_image" src="{{$data->image}}"><br>
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="themes" class="col-sm-2 col-form-label">Themes:</label>
+                    <label for="themes" class="col-sm-2 col-form-label">{{trans('global.theme')}}:</label>
                     <div class="col-sm-10">
                         <div class="row">
                             @foreach($themes as $theme)

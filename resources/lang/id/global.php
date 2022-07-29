@@ -35,6 +35,7 @@ return [
     'recommended'                               => 'Rekomendasi ',
     'width'                                     => 'lebar',
     'height'                                    => 'tinggi',
+    'image'                                     => 'Gambar',
     'image_action'                              => 'Tindakan gambar: ',
     'image_action_crop'                         => 'pangkas',
     'image_action_resize'                       => 'ubah ukuran',
@@ -69,6 +70,7 @@ return [
     'parent_title'                              => 'Induk',
     'parent_child'                              => 'Anak',
     /*Developer Tools*/
+    'apps_configuration'                        => 'Konfigurasi Aplikasi',
     'developer_tools'                           => 'Alat Pengembang',
     'developer_page_import'                     => 'Halaman Impor',
     'developer_users'                           => 'Pengguna Admin',
@@ -80,6 +82,7 @@ return [
     'admins_pass'                               => 'Kata Sandi',
     'admins_role'                               => 'Peran',
     'new_password'                              => 'Ubah Kata Sandi:',
+    'theme'                                     => 'Tema',
     'admins_page_import_title'                  => 'Impor Halaman',
     'admins_page_import'                        => 'Impor',
     'admins_page_import_single_finished'        => 'Diimpor.',

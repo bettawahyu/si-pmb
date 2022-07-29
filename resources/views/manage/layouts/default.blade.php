@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @include('manage.layouts.header_custom_top')
     @include('manage.layouts.header_scripts')
     @include('manage.layouts.header_custom_bottom')
-    <title>Admiko</title>
+    <title>SI PMB - {{\App\Models\Manage\Sekolah::all()->first()->nama_sekolah}}</title>
 </head>
 <body>
 <div class="containerBox">

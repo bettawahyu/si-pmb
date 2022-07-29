@@ -48,7 +48,7 @@ class PendaftarController extends Controller
         $urut = Pendaftar::count();
         $urut = $urut + 1;
         $nopen = "PSB-".date("y").sprintf("%03d",$urut);
-		$agama_all = Agama::all()->sortBy("nama_agama")->pluck("nama_agama", "id");
+		$agama_all = Agama::all()->sortBy("id")->pluck("nama_agama", "id");
 		$jenis_kelamin_all = JenisKelamin::all()->sortBy("jenis_kelamin")->pluck("jenis_kelamin", "id");
 		$pekerjaan_orang_tua_all = PekerjaanOrangTua::all()->sortBy("jenis_pekerjaan")->pluck("jenis_pekerjaan", "id");
 		$kelas_all = Kelas::all()->sortBy("nama_kelas")->pluck("nama_kelas", "id");

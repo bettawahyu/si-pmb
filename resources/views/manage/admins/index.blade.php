@@ -18,7 +18,7 @@
                     </div>
                     <div class="col mb-2 searchTable">
                         <div class="input-group ms-auto">
-                            <input type="text" name="admiko_search" class="form-control" placeholder="Search" value="">
+                            <input type="text" name="admiko_search" class="form-control" placeholder="{{trans("global.search")}}" value="">
                         </div>
                     </div>
                 </div>

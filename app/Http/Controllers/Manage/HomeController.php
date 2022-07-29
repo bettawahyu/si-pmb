@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Manage\DiterimaRequest;
 use Gate;
 use App\Models\Manage\Pendaftar;
+use App\Models\Manage\Sekolah;
 use App\Models\Manage\Kelas;
 use Illuminate\Support\Facades\DB;
 
@@ -17,6 +18,7 @@ class HomeController extends Controller
         $admiko_data['sideBarActiveFolder'] = "";
 
         $tableData = Diterima::orderByDesc("id")->get();
+        $sekolah = Sekolah::orderby('id')->first();
         $pendaftar = Pendaftar::count();
         $lolos = DB::table('diterima_siswa_yang_diterima_many')->count();
         $tolak = DB::table('ditolak_siswa_yang_ditolak_many')->count();
@@ -43,6 +45,6 @@ class HomeController extends Controller
         if(empty($datapendaftar)){
             $datapendaftar = $tableData;
         }
-        return view('manage.home.index')->with(compact('admiko_data', "tableData", 'datapendaftar','pendaftar','lolos','tolak'));
+        return view('manage.home.index')->with(compact('admiko_data', "tableData",'sekolah', 'datapendaftar','pendaftar','lolos','tolak'));
     }
 }

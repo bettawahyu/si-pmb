@@ -28,7 +28,7 @@
                         <div class="d-flex justify-content-start justify-content-sm-end">
                             <div class="searchTable">
 					<div class="input-group ps-2">
-                        <input type="text" name="admiko_search" class="form-control searchTableInput" placeholder="Search" value="">
+                        <input type="text" name="admiko_search" class="form-control searchTableInput" placeholder="{{trans("global.search")}}" value="">
                     </div></div>
                         </div>
                     </div>
@@ -44,6 +44,7 @@
 							<th scope="col" class="text-nowrap d-none d-md-table-cell">Nomor Telp.</th>
 							<th scope="col" class="text-nowrap d-none d-lg-table-cell">Kelas</th>
 							<th scope="col" class="text-nowrap d-none d-lg-table-cell">Jenis Kelamin</th>
+                            <th scope="col" class="text-nowrap d-none d-lg-table-cell">Lihat Berkas</th>
                             <th scope="col" class="w-5 no-sort" data-orderable="false">{{trans("admiko.table_edit")}}</th>
                             @if(Gate::allows('pendaftar_allow'))
                             <th scope="col" class="w-5 no-sort" data-orderable="false">{{trans('admiko.table_delete')}}</th>
@@ -59,6 +60,7 @@
 							<td class="text-nowrap d-none d-md-table-cell">{{$data->nomor_telp}}</td>
 							<td class="text-nowrap d-none d-lg-table-cell">{{$data->kelas_id->nama_kelas??""}}</td>
 							<td class="text-nowrap d-none d-lg-table-cell">{{$data->jenis_kelamin_id->jenis_kelamin??""}}</td>
+                            <td class="text-nowrap d-none d-lg-table-cell"><i class="fas fa-search-plus fa-fw"></i>Lihat</td>
                             <td class="w-5 no-sort"><a href="{{route("manage.pendaftar.edit",[$data->id])}}"><i class="fas fa-edit fa-fw"></i></a></td>
                             @if(Gate::allows(['pendaftar_allow']))
                             <td class="w-5 no-sort">

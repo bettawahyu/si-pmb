@@ -28,7 +28,7 @@
                         <div class="d-flex justify-content-start justify-content-sm-end">
                             <div class="searchTable">
 					<div class="input-group ps-2">
-                        <input type="text" name="admiko_search" class="form-control searchTableInput" placeholder="Search" value="">
+                        <input type="text" name="admiko_search" class="form-control searchTableInput" placeholder="{{trans("global.search")}}" value="">
                     </div></div>
                         </div>
                     </div>

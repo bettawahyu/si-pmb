@@ -38,7 +38,8 @@ class MenuController extends Controller
         $admiko_data['formAction'] = route("manage.menu.store");
 
         $aktif_all = Menu::AKTIF_CONS;
-        return view("manage.menu.manage")->with(compact('admiko_data','aktif_all'));
+        return redirect(route("manage.menu.index"));
+        // return view("manage.menu.index")->with(compact('admiko_data','aktif_all'));
     }
 
     public function store(MenuRequest $request)
@@ -48,7 +49,7 @@ class MenuController extends Controller
         }
         $data = $request->all();
 
-        $Menu = Menu::create($data);
+        // $Menu = Menu::create($data);
 
         return redirect(route("manage.menu.index"));
     }
@@ -91,7 +92,7 @@ class MenuController extends Controller
         if (Gate::none(['menu_allow'])) {
             return redirect(route("manage.menu.index"));
         }
-        Menu::destroy($request->idDel);
+        // Menu::destroy($request->idDel);
         return back();
     }
 

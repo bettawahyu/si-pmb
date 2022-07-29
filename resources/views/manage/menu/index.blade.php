@@ -23,7 +23,7 @@
                         <div class="d-flex justify-content-start justify-content-sm-end">
                             <div class="searchTable">
 					<div class="input-group ps-2">
-                        <input type="text" name="admiko_search" class="form-control searchTableInput" placeholder="Search" value="">
+                        <input type="text" name="admiko_search" class="form-control searchTableInput" placeholder="{{trans("global.search")}}" value="">
                     </div></div>
                         </div>
                     </div>
@@ -37,10 +37,11 @@
 							<th scope="col" class="text-nowrap">Nama Menu</th>
                             <th scope="col" class="text-nowrap">Slug</th>
                             <th scope="col" class="text-nowrap">Status</th>
+                            <th scope="col" class="text-nowrap">Ubah Halaman</th>
                             <th scope="col" class="w-5 no-sort" data-orderable="false">{{trans("admiko.table_edit")}}</th>
-                            @if(Gate::allows('menu_allow'))
+                            {{-- @if(Gate::allows('menu_allow'))
                             <th scope="col" class="w-5 no-sort" data-orderable="false">{{trans('admiko.table_delete')}}</th>
-                            @endIf
+                            @endIf --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -56,11 +57,12 @@
                                     Tidak Aktif
                                 @endif
                             </td>
+                            <td class="text-nowrap"><i class="fas fa-book fa-fw"></i>Ubah</td>
                             <td class="w-5 no-sort"><a href="{{route("manage.menu.edit",[$data->id])}}"><i class="fas fa-edit fa-fw"></i></a></td>
                             @if(Gate::allows(['menu_allow']))
-                            <td class="w-5 no-sort">
+                            {{-- <td class="w-5 no-sort">
                             <a href="#" data-id="{{$data->id}}" class="admiko_deleteConfirm" data-bs-toggle="modal" data-bs-target="#deleteConfirm"><i class="fas fa-trash fa-fw"></i></a>
-                        </td>
+                        </td> --}}
                             @endIf
                         </tr>
                     @endforeach
@@ -69,9 +71,9 @@
             </div>
             <div class="row">
                 <div class="col-12 col-sm order-3 order-sm-0 pt-2">
-                    @if(Gate::any(['menu_allow']))
-                        <a href="{{route('manage.menu.create')}}" class="btn btn-primary" role="button"><i class="fas fa-plus fa-fw"></i> {{trans('admiko.table_add')}}</a>
-                    @endIf
+                    {{-- @if(Gate::any(['menu_allow']))
+                        <a href="{{route('manage.menu.create')}}" class="btn btn-primary" role="button" disabled><i class="fas fa-plus fa-fw"></i> {{trans('admiko.table_add')}}</a>
+                    @endIf --}}
                 </div>
                 <div class="col-12 col-sm-auto order-0 order-sm-3 pt-2 align-self-center paginationInfo"></div>
                 <div class="col-12 col-sm-auto order-0 order-sm-3 pt-2 text-end paginationBox"></div>
