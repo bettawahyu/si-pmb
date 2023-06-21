@@ -1,8 +1,8 @@
 <?php
 /**
- * @author     Thank you for using Admiko.com
- * @copyright  2020-2022
- * @link       https://Admiko.com
+ * @author     Thank you for using Duo Kreatif Apps
+ * @copyright  2022-2023
+ * @link       https://duokreatif.com
  * @Help       We are always looking to improve our code. If you know better and more creative way don't hesitate to contact us. Thank you.
  */
 namespace App\Http\Controllers\Manage;
@@ -20,12 +20,16 @@ class MenuController extends Controller
         if (Gate::none(['menu_allow', 'menu_edit'])) {
             return redirect(route("manage.home"));
         }
-        $admiko_data['sideBarActive'] = "Menu";
-		$admiko_data["sideBarActiveFolder"] = "dropdown_settings";
+        $dokre_data['sideBarActive'] = "Menu";
+		$dokre_data["sideBarActiveFolder"] = "dropdown_settings";
 
         $tableData = Menu::orderBy("id")->get();
+<<<<<<< Updated upstream
 
         return view("manage.menu.index")->with(compact('admiko_data', "tableData"));
+=======
+        return view("manage.menu.index")->with(compact('dokre_data', "tableData"));
+>>>>>>> Stashed changes
     }
 
     public function create()
@@ -33,13 +37,18 @@ class MenuController extends Controller
         if (Gate::none(['menu_allow'])) {
             return redirect(route("manage.menu.index"));
         }
-        $admiko_data['sideBarActive'] = "Menu";
-		$admiko_data["sideBarActiveFolder"] = "dropdown_settings";
-        $admiko_data['formAction'] = route("manage.menu.store");
+        $dokre_data['sideBarActive'] = "Menu";
+		$dokre_data["sideBarActiveFolder"] = "dropdown_settings";
+        $dokre_data['formAction'] = route("manage.menu.store");
 
+<<<<<<< Updated upstream
         $aktif_all = Menu::AKTIF_CONS;
         return redirect(route("manage.menu.index"));
         // return view("manage.menu.index")->with(compact('admiko_data','aktif_all'));
+=======
+
+        return view("manage.menu.manage")->with(compact('dokre_data'));
+>>>>>>> Stashed changes
     }
 
     public function store(MenuRequest $request)
@@ -66,13 +75,17 @@ class MenuController extends Controller
             return redirect(route("manage.menu.index"));
         }
 
-        $admiko_data['sideBarActive'] = "Menu";
-		$admiko_data["sideBarActiveFolder"] = "dropdown_settings";
-        $admiko_data['formAction'] = route("manage.menu.update", [$Menu->id]);
+        $dokre_data['sideBarActive'] = "Menu";
+		$dokre_data["sideBarActiveFolder"] = "dropdown_settings";
+        $dokre_data['formAction'] = route("manage.menu.update", [$Menu->id]);
 
         $aktif_all = Menu::AKTIF_CONS;
         $data = $Menu;
+<<<<<<< Updated upstream
         return view("manage.menu.manage")->with(compact('admiko_data', 'data','aktif_all'));
+=======
+        return view("manage.menu.manage")->with(compact('dokre_data', 'data'));
+>>>>>>> Stashed changes
     }
 
     public function update(MenuRequest $request,$id)

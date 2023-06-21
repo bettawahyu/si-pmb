@@ -1,8 +1,8 @@
 <?php
 /**
- * @author     Thank you for using Admiko.com
- * @copyright  2020-2022
- * @link       https://Admiko.com
+ * @author     Thank you for using Duo Kreatif Apps
+ * @copyright  2022-2023
+ * @link       https://duokreatif.com
  * @Help       We are always looking to improve our code. If you know better and more creative way don't hesitate to contact us. Thank you.
  */
 namespace App\Http\Controllers\Manage;
@@ -20,11 +20,11 @@ class JenisKelaminController extends Controller
         if (Gate::none(['jenis_kelamin_allow', 'jenis_kelamin_edit'])) {
             return redirect(route("manage.home"));
         }
-        $admiko_data['sideBarActive'] = "jenis_kelamin";
-		$admiko_data["sideBarActiveFolder"] = "dropdown_settings";
-        
+        $dokre_data['sideBarActive'] = "jenis_kelamin";
+		$dokre_data["sideBarActiveFolder"] = "dropdown_website";
+
         $tableData = JenisKelamin::orderBy("id")->get();
-        return view("manage.jenis_kelamin.index")->with(compact('admiko_data', "tableData"));
+        return view("manage.jenis_kelamin.index")->with(compact('dokre_data', "tableData"));
     }
 
     public function create()
@@ -32,12 +32,12 @@ class JenisKelaminController extends Controller
         if (Gate::none(['jenis_kelamin_allow'])) {
             return redirect(route("manage.jenis_kelamin.index"));
         }
-        $admiko_data['sideBarActive'] = "jenis_kelamin";
-		$admiko_data["sideBarActiveFolder"] = "dropdown_settings";
-        $admiko_data['formAction'] = route("manage.jenis_kelamin.store");
-        
-        
-        return view("manage.jenis_kelamin.manage")->with(compact('admiko_data'));
+        $dokre_data['sideBarActive'] = "jenis_kelamin";
+		$dokre_data["sideBarActiveFolder"] = "dropdown_website";
+        $dokre_data['formAction'] = route("manage.jenis_kelamin.store");
+
+
+        return view("manage.jenis_kelamin.manage")->with(compact('dokre_data'));
     }
 
     public function store(JenisKelaminRequest $request)
@@ -46,9 +46,9 @@ class JenisKelaminController extends Controller
             return redirect(route("manage.jenis_kelamin.index"));
         }
         $data = $request->all();
-        
+
         $JenisKelamin = JenisKelamin::create($data);
-        
+
         return redirect(route("manage.jenis_kelamin.index"));
     }
 
@@ -64,13 +64,13 @@ class JenisKelaminController extends Controller
             return redirect(route("manage.jenis_kelamin.index"));
         }
 
-        $admiko_data['sideBarActive'] = "jenis_kelamin";
-		$admiko_data["sideBarActiveFolder"] = "dropdown_settings";
-        $admiko_data['formAction'] = route("manage.jenis_kelamin.update", [$JenisKelamin->id]);
-        
-        
+        $dokre_data['sideBarActive'] = "jenis_kelamin";
+		$dokre_data["sideBarActiveFolder"] = "dropdown_website";
+        $dokre_data['formAction'] = route("manage.jenis_kelamin.update", [$JenisKelamin->id]);
+
+
         $data = $JenisKelamin;
-        return view("manage.jenis_kelamin.manage")->with(compact('admiko_data', 'data'));
+        return view("manage.jenis_kelamin.manage")->with(compact('dokre_data', 'data'));
     }
 
     public function update(JenisKelaminRequest $request,$id)
@@ -81,7 +81,7 @@ class JenisKelaminController extends Controller
         $data = $request->all();
         $JenisKelamin = JenisKelamin::find($id);
         $JenisKelamin->update($data);
-        
+
         return redirect(route("manage.jenis_kelamin.index"));
     }
 
@@ -93,7 +93,7 @@ class JenisKelaminController extends Controller
         JenisKelamin::destroy($request->idDel);
         return back();
     }
-    
-    
-    
+
+
+
 }

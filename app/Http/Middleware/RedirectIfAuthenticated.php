@@ -25,6 +25,7 @@ class RedirectIfAuthenticated
                 if ($guard == "admin") {
                     //user was authenticated with admin guard.
                     return redirect()->route('manage.home');
+
                 } else {
                     //default guard.
                     return redirect(RouteServiceProvider::HOME);

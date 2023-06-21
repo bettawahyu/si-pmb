@@ -6,6 +6,7 @@
   <div class="site-wrap">
 
     @include('frontend.layouts.menu')
+    {{-- @include('frontend.layouts.flash') --}}
     @yield('content')
     @include('frontend.layouts.footer_scripts')
 

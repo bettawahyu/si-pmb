@@ -1,9 +1,9 @@
 <?php
 /** Helper to send email to reset password. **/
 /**
- * @author     Thank you for using Admiko.com
- * @copyright  2020-2022
- * @link       https://Admiko.com
+ * @author     Thank you for using Duo Kreatif Apps
+ * @copyright  2022-2023
+ * @link       https://duokreatif.com
  * @Help       We are always looking to improve our code. If you know better and more creative way don't hesitate to contact us. Thank you.
  */
 namespace App\Http\Controllers\Manage\Auth;
@@ -38,7 +38,7 @@ class EmailResetLink extends Mailable
     public function build()
     {
         return $this->from(env('MAIL_FROM_ADDRESS',$this->details['email']),env('MAIL_FROM_NAME',$this->details['email']))
-                ->subject(trans('admiko.reset_email_subject'))
+                ->subject(trans('dokre.reset_email_subject'))
                 ->view('manage/auth/passwords/sendemail');
     }
 }

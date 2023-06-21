@@ -61,8 +61,8 @@ return [
             'url' => env('APP_URL'),
             'visibility' => 'public',
         ],
-        /**Admiko API Import disk is used for saving imported files using API**/
-        'admiko_api_import' => [
+        /**Dokre API Import disk is used for saving imported files using API**/
+        'dokre_api_import' => [
             'driver'     => 'local',
             'root'       => base_path(),
             'visibility' => 'public',

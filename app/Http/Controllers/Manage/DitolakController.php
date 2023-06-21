@@ -1,8 +1,8 @@
 <?php
 /**
- * @author     Thank you for using Admiko.com
- * @copyright  2020-2022
- * @link       https://Admiko.com
+ * @author     Thank you for using Duo Kreatif Apps
+ * @copyright  2022-2023
+ * @link       https://duokreatif.com
  * @Help       We are always looking to improve our code. If you know better and more creative way don't hesitate to contact us. Thank you.
  */
 namespace App\Http\Controllers\Manage;
@@ -23,8 +23,8 @@ class DitolakController extends Controller
         if (Gate::none(['ditolak_allow', 'ditolak_edit'])) {
             return redirect(route("manage.home"));
         }
-        $admiko_data['sideBarActive'] = "ditolak";
-		$admiko_data["sideBarActiveFolder"] = "dropdown_pendaftaran";
+        $dokre_data['sideBarActive'] = "ditolak";
+		$dokre_data["sideBarActiveFolder"] = "dropdown_pendaftaran";
 
         $tableData = Ditolak::orderByDesc("id")->get();
         $ditolak = DB::table('ditolak_siswa_yang_ditolak_many')->get();
@@ -53,7 +53,7 @@ class DitolakController extends Controller
             $dataditolak = $tableData;
         }
         $status_penolakan_all = Ditolak::STATUS_PENOLAKAN_CONS;
-        return view("manage.ditolak.index")->with(compact('admiko_data', "tableData",'dataditolak','status_penolakan_all'));
+        return view("manage.ditolak.index")->with(compact('dokre_data', "tableData",'dataditolak','status_penolakan_all'));
     }
 
     public function create()
@@ -61,9 +61,9 @@ class DitolakController extends Controller
         if (Gate::none(['ditolak_allow'])) {
             return redirect(route("manage.ditolak.index"));
         }
-        $admiko_data['sideBarActive'] = "ditolak";
-		$admiko_data["sideBarActiveFolder"] = "dropdown_pendaftaran";
-        $admiko_data['formAction'] = route("manage.ditolak.store");
+        $dokre_data['sideBarActive'] = "ditolak";
+		$dokre_data["sideBarActiveFolder"] = "dropdown_pendaftaran";
+        $dokre_data['formAction'] = route("manage.ditolak.store");
 
         $ditolak = DB::table('ditolak_siswa_yang_ditolak_many')->get();
         if(!empty($ditolak)){
@@ -71,13 +71,14 @@ class DitolakController extends Controller
                    //function($cekid) digunakan untuk subquery WhereNotIn
                     ->whereNotIn('id', function($cekid){$cekid->select('selected_id')->from('diterima_siswa_yang_diterima_many');})
                     ->whereNotIn('id', function($cekid){$cekid->select('selected_id')->from('ditolak_siswa_yang_ditolak_many');})
+                    ->whereNull('deleted_at')
                     ->orderBy('nama_siswa')
                     ->pluck("nama_siswa", "id");
         }else{
             $pendaftar_all = Pendaftar::all()->sortBy("nama_siswa")->pluck("nama_siswa", "id");
         }
 		$status_penolakan_all = Ditolak::STATUS_PENOLAKAN_CONS;
-        return view("manage.ditolak.manage")->with(compact('admiko_data','pendaftar_all','status_penolakan_all'));
+        return view("manage.ditolak.manage")->with(compact('dokre_data','pendaftar_all','status_penolakan_all'));
     }
 
     public function store(DitolakRequest $request)
@@ -90,6 +91,7 @@ class DitolakController extends Controller
         $Ditolak = Ditolak::create($data);
         $Ditolak->siswa_yang_ditolak_many()->sync($request->input("siswa_yang_ditolak", []));
         return redirect(route("manage.ditolak.index"));
+        
     }
 
     public function show($id)
@@ -104,15 +106,15 @@ class DitolakController extends Controller
             return redirect(route("manage.ditolak.index"));
         }
 
-        $admiko_data['sideBarActive'] = "ditolak";
-		$admiko_data["sideBarActiveFolder"] = "dropdown_pendaftaran";
-        $admiko_data['formAction'] = route("manage.ditolak.update", [$Ditolak->id]);
+        $dokre_data['sideBarActive'] = "ditolak";
+		$dokre_data["sideBarActiveFolder"] = "dropdown_pendaftaran";
+        $dokre_data['formAction'] = route("manage.ditolak.update", [$Ditolak->id]);
 
 
 		$pendaftar_all = Pendaftar::all()->sortBy("nama_siswa")->pluck("nama_siswa", "id");
 		$perubahan_status_all = Ditolak::PERUBAHAN_STATUS_CONS;
         $data = $Ditolak;
-        return view("manage.ditolak.manage")->with(compact('admiko_data', 'data','pendaftar_all','perubahan_status_all'));
+        return view("manage.ditolak.manage")->with(compact('dokre_data', 'data','pendaftar_all','perubahan_status_all'));
     }
 
     public function update(DitolakRequest $request,$id)

@@ -1,8 +1,8 @@
 <?php
 /**
- * @author     Thank you for using Admiko.com
- * @copyright  2020-2022
- * @link       https://Admiko.com
+ * @author     Thank you for using Duo Kreatif Apps
+ * @copyright  2022-2023
+ * @link       https://duokreatif.com
  * @Help       We are always looking to improve our code. If you know better and more creative way don't hesitate to contact us. Thank you.
  */
 namespace App\Http\Controllers\Manage;
@@ -20,11 +20,11 @@ class PekerjaanOrangTuaController extends Controller
         if (Gate::none(['pekerjaan_orang_tua_allow', 'pekerjaan_orang_tua_edit'])) {
             return redirect(route("manage.home"));
         }
-        $admiko_data['sideBarActive'] = "pekerjaan_orang_tua";
-		$admiko_data["sideBarActiveFolder"] = "dropdown_settings";
-        
+        $dokre_data['sideBarActive'] = "pekerjaan_orang_tua";
+		$dokre_data["sideBarActiveFolder"] = "dropdown_website";
+
         $tableData = PekerjaanOrangTua::orderBy("jenis_pekerjaan")->get();
-        return view("manage.pekerjaan_orang_tua.index")->with(compact('admiko_data', "tableData"));
+        return view("manage.pekerjaan_orang_tua.index")->with(compact('dokre_data', "tableData"));
     }
 
     public function create()
@@ -32,12 +32,12 @@ class PekerjaanOrangTuaController extends Controller
         if (Gate::none(['pekerjaan_orang_tua_allow'])) {
             return redirect(route("manage.pekerjaan_orang_tua.index"));
         }
-        $admiko_data['sideBarActive'] = "pekerjaan_orang_tua";
-		$admiko_data["sideBarActiveFolder"] = "dropdown_settings";
-        $admiko_data['formAction'] = route("manage.pekerjaan_orang_tua.store");
-        
-        
-        return view("manage.pekerjaan_orang_tua.manage")->with(compact('admiko_data'));
+        $dokre_data['sideBarActive'] = "pekerjaan_orang_tua";
+		$dokre_data["sideBarActiveFolder"] = "dropdown_website";
+        $dokre_data['formAction'] = route("manage.pekerjaan_orang_tua.store");
+
+
+        return view("manage.pekerjaan_orang_tua.manage")->with(compact('dokre_data'));
     }
 
     public function store(PekerjaanOrangTuaRequest $request)
@@ -46,9 +46,9 @@ class PekerjaanOrangTuaController extends Controller
             return redirect(route("manage.pekerjaan_orang_tua.index"));
         }
         $data = $request->all();
-        
+
         $PekerjaanOrangTua = PekerjaanOrangTua::create($data);
-        
+
         return redirect(route("manage.pekerjaan_orang_tua.index"));
     }
 
@@ -64,13 +64,13 @@ class PekerjaanOrangTuaController extends Controller
             return redirect(route("manage.pekerjaan_orang_tua.index"));
         }
 
-        $admiko_data['sideBarActive'] = "pekerjaan_orang_tua";
-		$admiko_data["sideBarActiveFolder"] = "dropdown_settings";
-        $admiko_data['formAction'] = route("manage.pekerjaan_orang_tua.update", [$PekerjaanOrangTua->id]);
-        
-        
+        $dokre_data['sideBarActive'] = "pekerjaan_orang_tua";
+		$dokre_data["sideBarActiveFolder"] = "dropdown_website";
+        $dokre_data['formAction'] = route("manage.pekerjaan_orang_tua.update", [$PekerjaanOrangTua->id]);
+
+
         $data = $PekerjaanOrangTua;
-        return view("manage.pekerjaan_orang_tua.manage")->with(compact('admiko_data', 'data'));
+        return view("manage.pekerjaan_orang_tua.manage")->with(compact('dokre_data', 'data'));
     }
 
     public function update(PekerjaanOrangTuaRequest $request,$id)
@@ -81,7 +81,7 @@ class PekerjaanOrangTuaController extends Controller
         $data = $request->all();
         $PekerjaanOrangTua = PekerjaanOrangTua::find($id);
         $PekerjaanOrangTua->update($data);
-        
+
         return redirect(route("manage.pekerjaan_orang_tua.index"));
     }
 
@@ -93,7 +93,7 @@ class PekerjaanOrangTuaController extends Controller
         PekerjaanOrangTua::destroy($request->idDel);
         return back();
     }
-    
-    
-    
+
+
+
 }

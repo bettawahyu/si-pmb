@@ -1,9 +1,9 @@
 <?php
-/** Translation for Admiko CMS. **/
+/** Translation for Dokre CMS. **/
 /**
- * @author     Thank you for using Admiko.com
- * @copyright  2020-2022
- * @link       https://Admiko.com
+ * @author     Thank you for using Duo Kreatif Apps
+ * @copyright  2022-2023
+ * @link       https://duokreatif.com
  * @Help       We are always looking to improve our code. If you know better and more creative way don't hesitate to contact us. Thank you.
  */
 /**
@@ -88,12 +88,12 @@ return [
     'error_page_import_title'            => 'Error',
     'error_page_import_message'          => 'Error importing files. Please refresh page and try again.',
     'error_page_import_close_btn'        => 'Close',
-    'admins_admiko_update'               => 'Update',
-    'admins_admiko_update_backup'        => 'Backup old files',
-    'admins_admiko_update_backup_info'   => 'Backup location for existing files: ',
+    'admins_dokre_update'               => 'Update',
+    'admins_dokre_update_backup'        => 'Backup old files',
+    'admins_dokre_update_backup_info'   => 'Backup location for existing files: ',
     'admins_page_name'                   => 'Page Name',
     'admins_soft_delete'                 => 'Soft Delete',
-    'admiko_api_import_missing'          => 'Filesystems "admiko_api_import" disk is missing!',
+    'dokre_api_import_missing'          => 'Filesystems "dokre_api_import" disk is missing!',
     'multi_tenancy_access_title'         => 'Multi-Tenancy:',
     'multi_tenancy_access'               => 'Multi-Tenancy: Allow users to see records only from selected users.',
     'multi_tenancy_access_limit'         => 'Accessible on edit page only for non developer roles.',
@@ -106,7 +106,7 @@ return [
     'roles_deny'                         => 'No Access',
     'roles_allow'                        => 'Full Access',
     'roles_edit'                         => 'Edit Only',
-    /*admiko_auditable_view*/
+    /*dokre_auditable_view*/
     'auditable_title'                    => 'Auditable Logs',
     'auditable_time'                     => 'Time',
     'auditable_action'                   => 'Action',

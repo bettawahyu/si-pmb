@@ -1,8 +1,8 @@
 <?php
 /**
- * @author     Thank you for using Admiko.com
- * @copyright  2020-2022
- * @link       https://Admiko.com
+ * @author     Thank you for using Duo Kreatif Apps
+ * @copyright  2022-2023
+ * @link       https://duokreatif.com
  * @Help       We are always looking to improve our code. If you know better and more creative way don't hesitate to contact us. Thank you.
  */
 namespace App\Http\Controllers\Manage;
@@ -20,11 +20,11 @@ class TahunAjaranController extends Controller
         if (Gate::none(['tahun_ajaran_allow', 'tahun_ajaran_edit'])) {
             return redirect(route("manage.home"));
         }
-        $admiko_data['sideBarActive'] = "tahun_ajaran";
-		$admiko_data["sideBarActiveFolder"] = "dropdown_settings";
-        
+        $dokre_data['sideBarActive'] = "tahun_ajaran";
+		$dokre_data["sideBarActiveFolder"] = "dropdown_website";
+
         $tableData = TahunAjaran::orderByDesc("id")->get();
-        return view("manage.tahun_ajaran.index")->with(compact('admiko_data', "tableData"));
+        return view("manage.tahun_ajaran.index")->with(compact('dokre_data', "tableData"));
     }
 
     public function create()
@@ -32,13 +32,13 @@ class TahunAjaranController extends Controller
         if (Gate::none(['tahun_ajaran_allow'])) {
             return redirect(route("manage.tahun_ajaran.index"));
         }
-        $admiko_data['sideBarActive'] = "tahun_ajaran";
-		$admiko_data["sideBarActiveFolder"] = "dropdown_settings";
-        $admiko_data['formAction'] = route("manage.tahun_ajaran.store");
-        
-        
+        $dokre_data['sideBarActive'] = "tahun_ajaran";
+		$dokre_data["sideBarActiveFolder"] = "dropdown_website";
+        $dokre_data['formAction'] = route("manage.tahun_ajaran.store");
+
+
 		$status_aktif_all = TahunAjaran::STATUS_AKTIF_CONS;
-        return view("manage.tahun_ajaran.manage")->with(compact('admiko_data','status_aktif_all'));
+        return view("manage.tahun_ajaran.manage")->with(compact('dokre_data','status_aktif_all'));
     }
 
     public function store(TahunAjaranRequest $request)
@@ -47,9 +47,9 @@ class TahunAjaranController extends Controller
             return redirect(route("manage.tahun_ajaran.index"));
         }
         $data = $request->all();
-        
+
         $TahunAjaran = TahunAjaran::create($data);
-        
+
         return redirect(route("manage.tahun_ajaran.index"));
     }
 
@@ -65,14 +65,14 @@ class TahunAjaranController extends Controller
             return redirect(route("manage.tahun_ajaran.index"));
         }
 
-        $admiko_data['sideBarActive'] = "tahun_ajaran";
-		$admiko_data["sideBarActiveFolder"] = "dropdown_settings";
-        $admiko_data['formAction'] = route("manage.tahun_ajaran.update", [$TahunAjaran->id]);
-        
-        
+        $dokre_data['sideBarActive'] = "tahun_ajaran";
+		$dokre_data["sideBarActiveFolder"] = "dropdown_website";
+        $dokre_data['formAction'] = route("manage.tahun_ajaran.update", [$TahunAjaran->id]);
+
+
 		$status_aktif_all = TahunAjaran::STATUS_AKTIF_CONS;
         $data = $TahunAjaran;
-        return view("manage.tahun_ajaran.manage")->with(compact('admiko_data', 'data','status_aktif_all'));
+        return view("manage.tahun_ajaran.manage")->with(compact('dokre_data', 'data','status_aktif_all'));
     }
 
     public function update(TahunAjaranRequest $request,$id)
@@ -83,7 +83,7 @@ class TahunAjaranController extends Controller
         $data = $request->all();
         $TahunAjaran = TahunAjaran::find($id);
         $TahunAjaran->update($data);
-        
+
         return redirect(route("manage.tahun_ajaran.index"));
     }
 
@@ -95,7 +95,7 @@ class TahunAjaranController extends Controller
         TahunAjaran::destroy($request->idDel);
         return back();
     }
-    
-    
-    
+
+
+
 }

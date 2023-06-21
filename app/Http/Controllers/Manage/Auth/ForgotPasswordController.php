@@ -1,9 +1,9 @@
 <?php
 /** Helper to reset password. **/
 /**
- * @author     Admiko.com
+ * @author     Duo Kreatif Apps
  * @copyright  2020-2120
- * @link       https://Admiko.com
+ * @link       https://duokreatif.com
  * @Help       We are always looking to improve our code. If you know better and more creative way don't hesitate to contact us. Thank you.
  */
 namespace App\Http\Controllers\Manage\Auth;
@@ -29,9 +29,9 @@ class ForgotPasswordController extends Controller
             $Admins->find($email->id)->update($data);
             $data['email'] = $email->email;
             \Mail::to($email->email)->send(new \App\Http\Controllers\Manage\Auth\EmailResetLink($data));
-            return redirect()->back()->with('message_sent', trans('admiko.reset_email_send_success'));
+            return redirect()->back()->with('message_sent', trans('dokre.reset_email_send_success'));
         } else {
-            return redirect()->back()->withInput()->with('error', trans('admiko.reset_email_send_fail'));
+            return redirect()->back()->withInput()->with('error', trans('dokre.reset_email_send_fail'));
         }
     }
 

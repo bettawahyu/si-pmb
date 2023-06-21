@@ -1,9 +1,9 @@
 <?php
 /** Request for roles. **/
 /**
- * @author     Thank you for using Admiko.com
- * @copyright  2020-2022
- * @link       https://Admiko.com
+ * @author     Thank you for using Duo Kreatif Apps
+ * @copyright  2022-2023
+ * @link       https://duokreatif.com
  * @Help       We are always looking to improve our code. If you know better and more creative way don't hesitate to contact us. Thank you.
  */
 namespace App\Http\Requests\Manage\Admins;
@@ -27,8 +27,8 @@ class AdminRolesRequest extends FormRequest
     public function attributes()
     {
         return [
-            "title"      => trans('admiko.roles_title'),
-            "permission" => trans('admiko.roles_permission')
+            "title"      => trans('dokre.roles_title'),
+            "permission" => trans('dokre.roles_permission')
         ];
     }
 

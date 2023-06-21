@@ -1,8 +1,8 @@
 <?php
 /**
- * @author     Thank you for using Admiko.com
- * @copyright  2020-2022
- * @link       https://Admiko.com
+ * @author     Thank you for using Duo Kreatif Apps
+ * @copyright  2022-2023
+ * @link       https://duokreatif.com
  * @Help       We are always looking to improve our code. If you know better and more creative way don't hesitate to contact us. Thank you.
  */
 namespace App\Models\Manage;
@@ -14,19 +14,19 @@ use Illuminate\Support\Str;
 use App\Models\Manage\PekerjaanOrangTua;
 use App\Models\Manage\Kelas;
 use App\Models\Manage\TahunAjaran;
-use App\Http\Controllers\Traits\Manage\AdmikoFileUploadTrait;
-use App\Http\Controllers\Traits\Manage\AdmikoAuditableTrait;
-use App\Http\Controllers\Traits\Manage\AdmikoMultiTenantModeTrait;
+use App\Http\Controllers\Traits\Manage\DokreFileUploadTrait;
+use App\Http\Controllers\Traits\Manage\DokreAuditableTrait;
+use App\Http\Controllers\Traits\Manage\DokreMultiTenantModeTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Pendaftar extends Model
 {
-    use AdmikoFileUploadTrait,AdmikoAuditableTrait,AdmikoMultiTenantModeTrait,SoftDeletes;
+    use DokreFileUploadTrait,DokreAuditableTrait,DokreMultiTenantModeTrait,SoftDeletes;
 
     public $table = 'pendaftar';
 
 
-    static $admiko_file_info = [
+    static $dokre_file_info = [
 		"foto_pendaftar"=>[
 			"original"=>["action"=>"resize","width"=>1024,"height"=>768,"folder"=>"upload/pendaftar/"]
 		]
@@ -62,11 +62,11 @@ class Pendaftar extends Model
     ];
     public function getTanggalLahirAttribute($value)
     {
-        return $value ? Carbon::parse($value)->format(config('admiko_config.table_date_format')) : null;
+        return $value ? Carbon::parse($value)->format(config('dokre_config.table_date_format')) : null;
     }
     public function setTanggalLahirAttribute($value)
     {
-        $this->attributes['tanggal_lahir'] = $value ? Carbon::createFromFormat(config('admiko_config.table_date_format'), $value)->format('Y-m-d H:i:s') : null;
+        $this->attributes['tanggal_lahir'] = $value ? Carbon::createFromFormat(config('dokre_config.table_date_format'), $value)->format('Y-m-d') : null;
     }
 	public function agama_id()
     {
@@ -88,16 +88,20 @@ class Pendaftar extends Model
     {
         return $this->belongsTo(TahunAjaran::class, 'tahun_ajaran');
     }
+    public function unggahan()
+    {
+        return $this->hasMany(Dokumen::class);
+    }
     public function setFotoPendaftarAttribute()
     {
         if (request()->hasFile('foto_pendaftar')) {
-            $this->attributes['foto_pendaftar'] = $this->imageUpload(request()->file("foto_pendaftar"), Pendaftar::$admiko_file_info["foto_pendaftar"], $this->getOriginal('foto_pendaftar'));
+            $this->attributes['foto_pendaftar'] = $this->imageUpload(request()->file("foto_pendaftar"), Pendaftar::$dokre_file_info["foto_pendaftar"], $this->getOriginal('foto_pendaftar'));
         }
     }
-    public function setFotoPendaftarAdmikoDeleteAttribute($value)
+    public function setFotoPendaftarDokreDeleteAttribute($value)
     {
         if (!request()->hasFile('foto_pendaftar') && $value == 1) {
-            $this->attributes['foto_pendaftar'] = $this->imageUpload('', Pendaftar::$admiko_file_info["foto_pendaftar"], $this->getOriginal('foto_pendaftar'), $value);
+            $this->attributes['foto_pendaftar'] = $this->imageUpload('', Pendaftar::$dokre_file_info["foto_pendaftar"], $this->getOriginal('foto_pendaftar'), $value);
         }
     }
 }

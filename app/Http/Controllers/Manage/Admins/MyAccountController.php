@@ -1,9 +1,9 @@
 <?php
 /** Update logged user. **/
 /**
- * @author     Thank you for using Admiko.com
- * @copyright  2020-2022
- * @link       https://Admiko.com
+ * @author     Thank you for using Duo Kreatif Apps
+ * @copyright  2022-2023
+ * @link       https://duokreatif.com
  * @Help       We are always looking to improve our code. If you know better and more creative way don't hesitate to contact us. Thank you.
  */
 namespace App\Http\Controllers\Manage\Admins;
@@ -17,13 +17,13 @@ class MyAccountController extends Controller
 {
     public function index()
     {
-        $admiko_data['sideBarActive'] = "myaccount";
-        $admiko_data['sideBarActiveFolder'] = "dropdown_settings";
+        $dokre_data['sideBarActive'] = "myaccount";
+        $dokre_data['sideBarActiveFolder'] = "dropdown_settings";
         $data = auth()->user();
-        $themes = Storage::disk('admiko_api_import')->directories('public/assets/admiko/css/theme');
+        $themes = Storage::disk('dokre_api_import')->directories('public/assets/dokre/css/theme');
         $themes = array_map('basename', $themes);
 
-        return view("manage.admins.myaccount")->with(compact('admiko_data', 'data', 'themes'));
+        return view("manage.admins.myaccount")->with(compact('dokre_data', 'data', 'themes'));
     }
 
     public function update(Request $request, Admins $Admins)
@@ -37,7 +37,7 @@ class MyAccountController extends Controller
         ];
         $message = [];
         $attributes = [
-            "email" => trans('admiko.admins_email'),
+            "email" => trans('dokre.admins_email'),
         ];
         $request->validate($rules, $message, $attributes);
         $data['name'] = $request->name;
@@ -55,7 +55,7 @@ class MyAccountController extends Controller
         ];
         $message = [];
         $attributes = [
-            "password" => trans('admiko.admins_pass'),
+            "password" => trans('dokre.admins_pass'),
         ];
         $request->validate($rules, $message, $attributes);
         $data['password'] = $request->password;

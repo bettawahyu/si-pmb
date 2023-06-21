@@ -1,9 +1,9 @@
 <?php
 /** Admins users Model. **/
 /**
- * @author     Thank you for using Admiko.com
- * @copyright  2020-2022
- * @link       https://Admiko.com
+ * @author     Thank you for using Duo Kreatif Apps
+ * @copyright  2022-2023
+ * @link       https://duokreatif.com
  * @Help       We are always looking to improve our code. If you know better and more creative way don't hesitate to contact us. Thank you.
  */
 namespace App\Models\Manage\Admins;
@@ -44,7 +44,7 @@ class Admins extends Model
     public function setImageAttribute($value)
     {
         if ($value == '') {
-            $avatar = file_get_contents(base_path('public/assets/admiko/images/').'avatar.jpg');
+            $avatar = file_get_contents(base_path('public/assets/dokre/images/').'avatar.jpg');
             $base64 = base64_encode($avatar);
             $this->attributes['image'] = 'data:image/jpeg;base64,'.$base64;
         } else {

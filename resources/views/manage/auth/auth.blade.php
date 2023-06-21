@@ -4,8 +4,9 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ asset('assets/admiko/vendors/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/dokre/vendors/bootstrap/css/bootstrap.min.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('assets/dokre/css/style.css')}}">
     <title>Login</title>
     <style>
         *:focus, *:active, *:focus-within {
@@ -58,6 +59,12 @@
         .btn:hover {
             background-color: #2469ce;
         }
+
+        .imgcontainer {
+            text-align: center;
+            margin: 8px 12px 12px 12px;
+            position: relative;
+        }
     </style>
 </head>
 <body>
@@ -68,8 +75,8 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('assets/admiko/vendors/jquery/jquery-3.4.1.min.js') }}"></script>
-<script src="{{ asset('assets/admiko/vendors/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/dokre/vendors/jquery/jquery-3.4.1.min.js') }}"></script>
+<script src="{{ asset('assets/dokre/vendors/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script>
     $('.needs-validation').on('submit', function (event) {
         var form = $(this)[0];

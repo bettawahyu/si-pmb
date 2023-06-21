@@ -5,6 +5,7 @@ use App\Models\Manage\Diterima;
 use Illuminate\Http\Request;
 use App\Http\Requests\Manage\DiterimaRequest;
 use Gate;
+use App\Models\Manage\Sekolah;
 use App\Models\Manage\Pendaftar;
 use App\Models\Manage\Sekolah;
 use App\Models\Manage\Kelas;
@@ -14,8 +15,20 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $admiko_data['sideBarActive'] = "home";
-        $admiko_data['sideBarActiveFolder'] = "";
+        if (auth()->user()->role_id == 3) {
+        $dokre_data['sideBarActive'] = "home";
+        $dokre_data['sideBarActiveFolder'] = "";
+        $pendaftar = DB::table('pendaftar')->where('email',auth()->user()->email)->first();
+        $lolos = DB::table('diterima_siswa_yang_diterima_many')->where('selected_id', $pendaftar->id)->first();
+        $tolak = DB::table('ditolak_siswa_yang_ditolak_many')->where('selected_id', $pendaftar->id)->first();
+        // dd($lolos);
+        return view('manage.home.index')->with(compact('dokre_data','pendaftar','lolos','tolak'));
+        }
+        else
+        {
+
+        $dokre_data['sideBarActive'] = "home";
+        $dokre_data['sideBarActiveFolder'] = "";
 
         $tableData = Diterima::orderByDesc("id")->get();
         $sekolah = Sekolah::orderby('id')->first();
@@ -45,6 +58,12 @@ class HomeController extends Controller
         if(empty($datapendaftar)){
             $datapendaftar = $tableData;
         }
+<<<<<<< Updated upstream
         return view('manage.home.index')->with(compact('admiko_data', "tableData",'sekolah', 'datapendaftar','pendaftar','lolos','tolak'));
+=======
+        return view('manage.home.index')->with(compact('dokre_data', "tableData", 'datapendaftar','pendaftar','lolos','tolak'));
+        // }
+>>>>>>> Stashed changes
     }
+}
 }

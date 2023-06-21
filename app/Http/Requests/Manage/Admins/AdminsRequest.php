@@ -1,9 +1,9 @@
 <?php
 /** Manage roles for CMS users. **/
 /**
- * @author     Thank you for using Admiko.com
- * @copyright  2020-2022
- * @link       https://Admiko.com
+ * @author     Thank you for using Duo Kreatif Apps
+ * @copyright  2022-2023
+ * @link       https://duokreatif.com
  * @Help       We are always looking to improve our code. If you know better and more creative way don't hesitate to contact us. Thank you.
  */
 namespace App\Http\Requests\Manage\Admins;
@@ -33,9 +33,9 @@ class AdminsRequest extends FormRequest
     public function attributes()
     {
         return [
-            "name"    => trans('admiko.admins_name'),
-            "email"   => trans('admiko.admins_email'),
-            "role_id" => trans('admiko.admins_role')
+            "name"    => trans('dokre.admins_name'),
+            "email"   => trans('dokre.admins_email'),
+            "role_id" => trans('dokre.admins_role')
         ];
     }
 
