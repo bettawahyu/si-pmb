@@ -33,6 +33,7 @@ return [
     'recommended'                        => 'Recommended ',
     'width'                              => 'width ',
     'height'                             => 'height ',
+    'image'                              => 'Image',
     'image_action'                       => 'Image action: ',
     'image_action_crop'                  => 'crop',
     'image_action_resize'                => 'resize',
@@ -67,6 +68,7 @@ return [
     'parent_title'                       => 'Parent',
     'parent_child'                       => 'Child',
     /*Developer Tools*/
+    'apps_configuration'                 => 'Apps Configurations',
     'developer_tools'                    => 'Developer Tools',
     'developer_page_import'              => 'Page Import',
     'developer_users'                    => 'Admin Users',
@@ -78,6 +80,7 @@ return [
     'admins_pass'                        => 'Password',
     'admins_role'                        => 'Role',
     'new_password'                       => 'Change password:',
+    'theme'                              => 'Theme',
     'admins_page_import_title'           => 'Page Import',
     'admins_page_import'                 => 'Import',
     'admins_page_import_single_finished' => 'Imported.',

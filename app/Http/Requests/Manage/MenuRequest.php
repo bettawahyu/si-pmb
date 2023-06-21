@@ -16,7 +16,15 @@ class MenuRequest extends FormRequest
         return [
             "nama_menu"=>[
 				"string",
-				"nullable"
+				"required"
+			],
+            "slug"=>[
+				"string",
+				"required"
+			],
+            "aktif"=>[
+				"numeric",
+				"required"
 			]
         ];
     }
@@ -25,6 +33,7 @@ class MenuRequest extends FormRequest
         return [
             "nama_menu"=>"Nama Menu",
             "slug"=>"Slug",
+            "aktif"=>"Aktif",
         ];
     }
 

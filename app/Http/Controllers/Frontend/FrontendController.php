@@ -11,7 +11,8 @@ class FrontendController extends Controller
 {
     //
     public function frontendmenu(){
-        $Menu = Menu::orderBy('id')->get();
+
+        $Menu = Menu::where('aktif','1')->orderBy('id')->get();
         $Beranda = Menu::where('id',1)->first();
         $Tentang = Menu::where('id',2)->first();
         $Kenapa = Menu::where('id',3)->first();
@@ -19,5 +20,4 @@ class FrontendController extends Controller
 
         return view('frontend.welcome')->with(compact('Menu','Beranda', 'Tentang', 'Kenapa', 'Hubungi'));
     }
-
 }

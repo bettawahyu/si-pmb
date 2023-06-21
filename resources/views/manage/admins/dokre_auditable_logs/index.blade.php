@@ -25,7 +25,7 @@
                 <div class="col searchTable">
 					<form action="">
                         <div class="input-group ms-auto">
-                            <input type="text" name="search" class="form-control" placeholder="Search" value="{{app('request')->input('search')}}">
+                            <input type="text" name="search" class="form-control" placeholder="{{trans("global.search")}}" value="{{app('request')->input('search')}}">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit"><i class="fas fa-search fa-fw"></i></button>
                             </div>
