@@ -1,8 +1,8 @@
 <?php
 /**
- * @author     Thank you for using Admiko.com
- * @copyright  2020-2022
- * @link       https://Admiko.com
+ * @author     Thank you for using Duo Kreatif Apps
+ * @copyright  2022-2023
+ * @link       https://duokreatif.com
  * @Help       We are always looking to improve our code. If you know better and more creative way don't hesitate to contact us. Thank you.
  */
 namespace App\Http\Controllers\Manage;
@@ -20,11 +20,11 @@ class KelasController extends Controller
         if (Gate::none(['kelas_allow', 'kelas_edit'])) {
             return redirect(route("manage.home"));
         }
-        $admiko_data['sideBarActive'] = "kelas";
-		$admiko_data["sideBarActiveFolder"] = "dropdown_settings";
-        
+        $dokre_data['sideBarActive'] = "kelas";
+		$dokre_data["sideBarActiveFolder"] = "dropdown_website";
+
         $tableData = Kelas::orderBy("nama_kelas")->get();
-        return view("manage.kelas.index")->with(compact('admiko_data', "tableData"));
+        return view("manage.kelas.index")->with(compact('dokre_data', "tableData"));
     }
 
     public function create()
@@ -32,12 +32,12 @@ class KelasController extends Controller
         if (Gate::none(['kelas_allow'])) {
             return redirect(route("manage.kelas.index"));
         }
-        $admiko_data['sideBarActive'] = "kelas";
-		$admiko_data["sideBarActiveFolder"] = "dropdown_settings";
-        $admiko_data['formAction'] = route("manage.kelas.store");
-        
-        
-        return view("manage.kelas.manage")->with(compact('admiko_data'));
+        $dokre_data['sideBarActive'] = "kelas";
+		$dokre_data["sideBarActiveFolder"] = "dropdown_website";
+        $dokre_data['formAction'] = route("manage.kelas.store");
+
+
+        return view("manage.kelas.manage")->with(compact('dokre_data'));
     }
 
     public function store(KelasRequest $request)
@@ -46,9 +46,9 @@ class KelasController extends Controller
             return redirect(route("manage.kelas.index"));
         }
         $data = $request->all();
-        
+
         $Kelas = Kelas::create($data);
-        
+
         return redirect(route("manage.kelas.index"));
     }
 
@@ -64,13 +64,13 @@ class KelasController extends Controller
             return redirect(route("manage.kelas.index"));
         }
 
-        $admiko_data['sideBarActive'] = "kelas";
-		$admiko_data["sideBarActiveFolder"] = "dropdown_settings";
-        $admiko_data['formAction'] = route("manage.kelas.update", [$Kelas->id]);
-        
-        
+        $dokre_data['sideBarActive'] = "kelas";
+		$dokre_data["sideBarActiveFolder"] = "dropdown_website";
+        $dokre_data['formAction'] = route("manage.kelas.update", [$Kelas->id]);
+
+
         $data = $Kelas;
-        return view("manage.kelas.manage")->with(compact('admiko_data', 'data'));
+        return view("manage.kelas.manage")->with(compact('dokre_data', 'data'));
     }
 
     public function update(KelasRequest $request,$id)
@@ -81,7 +81,7 @@ class KelasController extends Controller
         $data = $request->all();
         $Kelas = Kelas::find($id);
         $Kelas->update($data);
-        
+
         return redirect(route("manage.kelas.index"));
     }
 
@@ -93,7 +93,7 @@ class KelasController extends Controller
         Kelas::destroy($request->idDel);
         return back();
     }
-    
-    
-    
+
+
+
 }

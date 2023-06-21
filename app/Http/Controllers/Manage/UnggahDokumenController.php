@@ -1,8 +1,8 @@
 <?php
 /**
- * @author     Thank you for using Admiko.com
- * @copyright  2020-2022
- * @link       https://Admiko.com
+ * @author     Thank you for using Duo Kreatif Apps
+ * @copyright  2022-2023
+ * @link       https://duokreatif.com
  * @Help       We are always looking to improve our code. If you know better and more creative way don't hesitate to contact us. Thank you.
  */
 namespace App\Http\Controllers\Manage;
@@ -20,11 +20,11 @@ class UnggahDokumenController extends Controller
         if (Gate::none(['unggah_dokumen_allow', 'unggah_dokumen_edit'])) {
             return redirect(route("manage.home"));
         }
-        $admiko_data['sideBarActive'] = "unggah_dokumen";
-		$admiko_data["sideBarActiveFolder"] = "dropdown_settings";
-        
+        $dokre_data['sideBarActive'] = "unggah_dokumen";
+		$dokre_data["sideBarActiveFolder"] = "dropdown_website";
+
         $tableData = UnggahDokumen::orderBy("nama_dokumen")->get();
-        return view("manage.unggah_dokumen.index")->with(compact('admiko_data', "tableData"));
+        return view("manage.unggah_dokumen.index")->with(compact('dokre_data', "tableData"));
     }
 
     public function create()
@@ -32,13 +32,13 @@ class UnggahDokumenController extends Controller
         if (Gate::none(['unggah_dokumen_allow'])) {
             return redirect(route("manage.unggah_dokumen.index"));
         }
-        $admiko_data['sideBarActive'] = "unggah_dokumen";
-		$admiko_data["sideBarActiveFolder"] = "dropdown_settings";
-        $admiko_data['formAction'] = route("manage.unggah_dokumen.store");
-        
-        
+        $dokre_data['sideBarActive'] = "unggah_dokumen";
+		$dokre_data["sideBarActiveFolder"] = "dropdown_website";
+        $dokre_data['formAction'] = route("manage.unggah_dokumen.store");
+
+
 		$status_aktif_all = UnggahDokumen::STATUS_AKTIF_CONS;
-        return view("manage.unggah_dokumen.manage")->with(compact('admiko_data','status_aktif_all'));
+        return view("manage.unggah_dokumen.manage")->with(compact('dokre_data','status_aktif_all'));
     }
 
     public function store(UnggahDokumenRequest $request)
@@ -47,9 +47,9 @@ class UnggahDokumenController extends Controller
             return redirect(route("manage.unggah_dokumen.index"));
         }
         $data = $request->all();
-        
+
         $UnggahDokumen = UnggahDokumen::create($data);
-        
+
         return redirect(route("manage.unggah_dokumen.index"));
     }
 
@@ -65,14 +65,14 @@ class UnggahDokumenController extends Controller
             return redirect(route("manage.unggah_dokumen.index"));
         }
 
-        $admiko_data['sideBarActive'] = "unggah_dokumen";
-		$admiko_data["sideBarActiveFolder"] = "dropdown_settings";
-        $admiko_data['formAction'] = route("manage.unggah_dokumen.update", [$UnggahDokumen->id]);
-        
-        
+        $dokre_data['sideBarActive'] = "unggah_dokumen";
+		$dokre_data["sideBarActiveFolder"] = "dropdown_website";
+        $dokre_data['formAction'] = route("manage.unggah_dokumen.update", [$UnggahDokumen->id]);
+
+
 		$status_aktif_all = UnggahDokumen::STATUS_AKTIF_CONS;
         $data = $UnggahDokumen;
-        return view("manage.unggah_dokumen.manage")->with(compact('admiko_data', 'data','status_aktif_all'));
+        return view("manage.unggah_dokumen.manage")->with(compact('dokre_data', 'data','status_aktif_all'));
     }
 
     public function update(UnggahDokumenRequest $request,$id)
@@ -83,7 +83,7 @@ class UnggahDokumenController extends Controller
         $data = $request->all();
         $UnggahDokumen = UnggahDokumen::find($id);
         $UnggahDokumen->update($data);
-        
+
         return redirect(route("manage.unggah_dokumen.index"));
     }
 
@@ -95,7 +95,7 @@ class UnggahDokumenController extends Controller
         UnggahDokumen::destroy($request->idDel);
         return back();
     }
-    
-    
-    
+
+
+
 }

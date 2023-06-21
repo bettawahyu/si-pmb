@@ -35,12 +35,24 @@ class TahunAjaranTableSeeder extends Seeder
             array (
                 'id' => 2,
                 'tahun_ajaran' => '2022/2023',
+                'status_aktif' => 'non-aktif',
+                'created_by' => 1,
+                'updated_by' => 1,
+                'deleted_by' => NULL,
+                'created_at' => '2022-05-25 03:37:01',
+                'updated_at' => '2023-04-05 11:29:07',
+                'deleted_at' => NULL,
+            ),
+            2 => 
+            array (
+                'id' => 3,
+                'tahun_ajaran' => '2023/2024',
                 'status_aktif' => 'aktif',
                 'created_by' => 1,
                 'updated_by' => NULL,
                 'deleted_by' => NULL,
-                'created_at' => '2022-05-25 03:37:01',
-                'updated_at' => '2022-05-25 03:37:01',
+                'created_at' => '2023-04-05 11:26:31',
+                'updated_at' => '2023-04-05 11:26:31',
                 'deleted_at' => NULL,
             ),
         ));

@@ -1,40 +1,40 @@
 @extends("manage.layouts.default")
 @section('breadcrumbs')
-    <li class="breadcrumb-item active"><a href="{{ route("manage.admins.index") }}">{{ trans('admiko.admins_title') }}</a></li>
-    <li class="breadcrumb-item active"><a href="{{ route("manage.admin_roles.index") }}">{{ trans('admiko.roles_page_title') }}</a></li>
+    <li class="breadcrumb-item active"><a href="{{ route("manage.admins.index") }}">{{ trans('dokre.admins_title') }}</a></li>
+    <li class="breadcrumb-item active"><a href="{{ route("manage.admin_roles.index") }}">{{ trans('dokre.roles_page_title') }}</a></li>
     @if(isset($data))
-        <li class="breadcrumb-item active" aria-current="page">{{trans('admiko.page_breadcrumbs_edit')}}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{trans('dokre.page_breadcrumbs_edit')}}</li>
     @else
-        <li class="breadcrumb-item active" aria-current="page">{{trans('admiko.page_breadcrumbs_add')}}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{trans('dokre.page_breadcrumbs_add')}}</li>
     @endIf
 @endsection
 @section('pageTitle')
-    <h1>{{ trans('admiko.roles_page_title') }}</h1>
+    <h1>{{ trans('dokre.roles_page_title') }}</h1>
 @endsection
 @section('pageInfo')@endsection
 @section('backBtn')
-    <a href="{{ route("manage.admin_roles.index") }}"><i class="fas fa-angle-left"></i> {{ trans('admiko.page_back_btn') }}</a>
+    <a href="{{ route("manage.admin_roles.index") }}"><i class="fas fa-angle-left"></i> {{ trans('dokre.page_back_btn') }}</a>
 @endsection
 @section('content')
     <div class="card formPage">
-        <legend class="action">{{ isset($data) ? trans('admiko.update') : trans('admiko.add_new') }}</legend>
-        <form method="POST" action="{{ $admiko_data['formAction'] }}" enctype="multipart/form-data" class="needs-validation" novalidate>
+        <legend class="action">{{ isset($data) ? trans('dokre.update') : trans('dokre.add_new') }}</legend>
+        <form method="POST" action="{{ $dokre_data['formAction'] }}" enctype="multipart/form-data" class="needs-validation" novalidate>
             @if(isset($data)) @method('PUT') @endIf
             @csrf
             <div class="card-body">
                 <div class="form-group row">
-                    <label for="title" class="col-sm-2 col-form-label">{{ trans('admiko.roles_title') }}:</label>
+                    <label for="title" class="col-sm-2 col-form-label">{{ trans('dokre.roles_title') }}:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" required id="title" name="title" placeholder="{{ trans('admiko.roles_title') }}" value="{{{ old('title', isset($data)?$data->title : '') }}}">
+                        <input type="text" class="form-control" required id="title" name="title" placeholder="{{ trans('dokre.roles_title') }}" value="{{{ old('title', isset($data)?$data->title : '') }}}">
                         @if ($errors->has('title'))
                             <div class="invalid-feedback d-block">{{ $errors->first('title') }}</div>@endif
-                        <div class="invalid-feedback">{{trans('admiko.required_text')}}</div>
+                        <div class="invalid-feedback">{{trans('dokre.required_text')}}</div>
                         <small id="title_help" class="form-text text-muted"></small>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="permission" class="col-sm-2 col-form-label">{{ trans('admiko.roles_permission') }}:</label>
-                    <div class="col-sm-10">@if(count($permission_all) == 0){{ trans('admiko.roles_permission_error') }}@endIf</div>
+                    <label for="permission" class="col-sm-2 col-form-label">{{ trans('dokre.roles_permission') }}:</label>
+                    <div class="col-sm-10">@if(count($permission_all) == 0){{ trans('dokre.roles_permission_error') }}@endIf</div>
                 </div>
                 @if(isset($data))
                     @php $permission_all_select = $data->permission_many_select(); @endphp
@@ -53,9 +53,9 @@
                         <div class="col-sm-10">
                             <div>
                                 <select class="form-select" name="permission[]" id="permission{{ $id }}">
-                                    <option value="{{ $value }}_deny" @if($selected == $value.'_deny') selected @endIf>{{trans('admiko.roles_deny')}}</option>
-                                    <option value="{{ $value }}_allow" @if($selected == $value.'_allow') selected @endIf>{{trans('admiko.roles_allow')}}</option>
-                                    <option value="{{ $value }}_edit" @if($selected == $value.'_edit') selected @endIf>{{trans('admiko.roles_edit')}}</option>
+                                    <option value="{{ $value }}_deny" @if($selected == $value.'_deny') selected @endIf>{{trans('dokre.roles_deny')}}</option>
+                                    <option value="{{ $value }}_allow" @if($selected == $value.'_allow') selected @endIf>{{trans('dokre.roles_allow')}}</option>
+                                    <option value="{{ $value }}_edit" @if($selected == $value.'_edit') selected @endIf>{{trans('dokre.roles_edit')}}</option>
                                 </select>
                             </div>
                         </div>
@@ -67,10 +67,10 @@
                     <div class="row" id="form-group-buttons">
                         <div class="col-2"></div>
                         <div class="col">
-                            <button type="submit" class="btn btn-primary mb-5 mb-sm-0 ms-3 ms-sm-0 save-button">{{ trans('admiko.table_save') }}</button>
+                            <button type="submit" class="btn btn-primary mb-5 mb-sm-0 ms-3 ms-sm-0 save-button">{{ trans('dokre.table_save') }}</button>
                         </div>
                         <div class="secondaryButtons col pt-0 text-end">
-                            <a href="{{ route("manage.admin_roles.index") }}" class="btn btn-secondary mb-1 mb-sm-0  ms-3 ms-sm-0" role="button">{{ trans('admiko.table_cancel') }}</a>
+                            <a href="{{ route("manage.admin_roles.index") }}" class="btn btn-secondary mb-1 mb-sm-0  ms-3 ms-sm-0" role="button">{{ trans('dokre.table_cancel') }}</a>
                         </div>
                     </div>
                 </div>

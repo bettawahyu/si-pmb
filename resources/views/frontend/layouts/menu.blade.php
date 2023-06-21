@@ -27,7 +27,7 @@
         <div class="ml-auto w-10">
           <nav class="site-navigation position-relative text-right" role="navigation">
             <ul class="site-menu main-menu site-menu-dark js-clone-nav mr-auto d-none d-lg-block m-0 p-0">
-              <li class="cta"><a href="#contact-section" class="nav-link"><span>Login/Register</span></a></li>
+              <li class="cta"><a href="/register" class="nav-link"><span>Daftar Baru</span></a></li>
             </ul>
           </nav>
           <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right"><span class="icon-menu h3"></span></a>

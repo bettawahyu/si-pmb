@@ -25,12 +25,12 @@
                             <tr>
                                 <td style="padding:0 35px;">
                                     <h1 style="color:#1e1e2d; font-weight:500; margin:0;font-size:32px;">
-                                        {{trans('admiko.reset_email_reset_message_header')}}
+                                        {{trans('dokre.reset_email_reset_message_header')}}
                                     </h1>
                                     <span style="display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;"></span>
-                                    <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">{{trans('admiko.reset_email_reset_message_body')}}</p>
+                                    <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">{{trans('dokre.reset_email_reset_message_body')}}</p>
                                     <a href="{{ route("manage.password.reset",$details['reset_token']) }}" target="_blank" style="background:#3b7ddd;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 50px;display:inline-block;border-radius:4px;">
-                                        {{trans('admiko.reset_password_button')}}
+                                        {{trans('dokre.reset_password_button')}}
                                     </a>
                                 </td>
                             </tr>

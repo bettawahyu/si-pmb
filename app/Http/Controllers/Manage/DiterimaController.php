@@ -1,8 +1,8 @@
 <?php
 /**
- * @author     Thank you for using Admiko.com
- * @copyright  2020-2022
- * @link       https://Admiko.com
+ * @author     Thank you for using Duo Kreatif Apps
+ * @copyright  2022-2023
+ * @link       https://duokreatif.com
  * @Help       We are always looking to improve our code. If you know better and more creative way don't hesitate to contact us. Thank you.
  */
 namespace App\Http\Controllers\Manage;
@@ -23,8 +23,8 @@ class DiterimaController extends Controller
         if (Gate::none(['diterima_allow', 'diterima_edit'])) {
             return redirect(route("manage.home"));
         }
-        $admiko_data['sideBarActive'] = "diterima";
-		$admiko_data["sideBarActiveFolder"] = "dropdown_pendaftaran";
+        $dokre_data['sideBarActive'] = "diterima";
+		$dokre_data["sideBarActiveFolder"] = "dropdown_pendaftaran";
 
         $tableData = Diterima::orderByDesc("id")->get();
         $diterima = DB::table('diterima_siswa_yang_diterima_many')->get();
@@ -52,7 +52,7 @@ class DiterimaController extends Controller
             DB::statement("SET foreign_key_checks=1");
             $datapendaftar = $tableData;
         }
-        return view("manage.diterima.index")->with(compact('admiko_data', "tableData", 'datapendaftar'));
+        return view("manage.diterima.index")->with(compact('dokre_data', "tableData", 'datapendaftar'));
     }
 
     public function create()
@@ -60,22 +60,26 @@ class DiterimaController extends Controller
         if (Gate::none(['diterima_allow'])) {
             return redirect(route("manage.diterima.index"));
         }
-        $admiko_data['sideBarActive'] = "diterima";
-		$admiko_data["sideBarActiveFolder"] = "dropdown_pendaftaran";
-        $admiko_data['formAction'] = route("manage.diterima.store");
+        $dokre_data['sideBarActive'] = "diterima";
+		$dokre_data["sideBarActiveFolder"] = "dropdown_pendaftaran";
+        $dokre_data['formAction'] = route("manage.diterima.store");
 
         $diterima = DB::table('diterima_siswa_yang_diterima_many')->get();
         if(!empty($diterima)){
             $pendaftar_all = DB::table('pendaftar')
                    //function($cekid) digunakan untuk subquery WhereNotIn
+                    ->whereNotNull('nama_ayah')
+                    ->whereNotNull('tempat_lahir')
+                    ->whereNotNull('nama_ibu')
                     ->whereNotIn('id', function($cekid){$cekid->select('selected_id')->from('diterima_siswa_yang_diterima_many');})
                     ->whereNotIn('id', function($cekid){$cekid->select('selected_id')->from('ditolak_siswa_yang_ditolak_many');})
+                    ->whereNull('deleted_at')
                     ->orderBy('nama_siswa')
                     ->pluck("nama_siswa", "id");
         }else{
-            $pendaftar_all = Pendaftar::all()->sortBy("nama_siswa")->pluck("nama_siswa", "id");
+            $pendaftar_all = Pendaftar::all()->whereNotNull('tempat_lahir','nama_ibu')->sortBy("nama_siswa")->pluck("nama_siswa", "id");
         }
-        return view("manage.diterima.manage")->with(compact('admiko_data','pendaftar_all'));
+        return view("manage.diterima.manage")->with(compact('dokre_data','pendaftar_all'));
     }
 
     public function store(DiterimaRequest $request)
@@ -87,7 +91,11 @@ class DiterimaController extends Controller
 
         $Diterima = Diterima::create($data);
         $Diterima->siswa_yang_diterima_many()->sync($request->input("siswa_yang_diterima", []));
-		if($request->input("siswa_yang_diterima")){ foreach($request->input("siswa_yang_diterima") as $key=>$id) { $Diterima->siswa_yang_diterima_many()->updateExistingPivot($id, ["admiko_order"=>$key]); }}
+		if($request->input("siswa_yang_diterima")){ 
+            foreach($request->input("siswa_yang_diterima") as $key=>$id) { 
+                $Diterima->siswa_yang_diterima_many()->updateExistingPivot($id, ["dokre_order"=>$key]); 
+            }
+        }
         return redirect(route("manage.diterima.index"));
     }
 
@@ -103,14 +111,14 @@ class DiterimaController extends Controller
             return redirect(route("manage.diterima.index"));
         }
 
-        $admiko_data['sideBarActive'] = "diterima";
-		$admiko_data["sideBarActiveFolder"] = "dropdown_pendaftaran";
-        $admiko_data['formAction'] = route("manage.diterima.update", [$Diterima->id]);
+        $dokre_data['sideBarActive'] = "diterima";
+		$dokre_data["sideBarActiveFolder"] = "dropdown_pendaftaran";
+        $dokre_data['formAction'] = route("manage.diterima.update", [$Diterima->id]);
 
 
 		$pendaftar_all = Pendaftar::all()->sortBy("nama_siswa")->pluck("nama_siswa", "id");
         $data = $Diterima;
-        return view("manage.diterima.manage")->with(compact('admiko_data', 'data','pendaftar_all'));
+        return view("manage.diterima.manage")->with(compact('dokre_data', 'data','pendaftar_all'));
     }
 
     public function update(DiterimaRequest $request,$id)
@@ -122,7 +130,7 @@ class DiterimaController extends Controller
         $Diterima = Diterima::find($id);
         $Diterima->update($data);
         $Diterima->siswa_yang_diterima_many()->sync($request->input("siswa_yang_diterima", []));
-		if($request->input("siswa_yang_diterima")){ foreach($request->input("siswa_yang_diterima") as $key=>$id) { $Diterima->siswa_yang_diterima_many()->updateExistingPivot($id, ["admiko_order"=>$key]); }}
+		if($request->input("siswa_yang_diterima")){ foreach($request->input("siswa_yang_diterima") as $key=>$id) { $Diterima->siswa_yang_diterima_many()->updateExistingPivot($id, ["dokre_order"=>$key]); }}
         return redirect(route("manage.diterima.index"));
     }
 

@@ -1,9 +1,9 @@
 <?php
-/** Admiko Global Search Controller **/
+/** Dokre Global Search Controller **/
 /**
- * @author     Thank you for using Admiko.com
- * @copyright  2020-2022
- * @link       https://Admiko.com
+ * @author     Thank you for using Duo Kreatif Apps
+ * @copyright  2022-2023
+ * @link       https://duokreatif.com
  * @Help       We are always looking to improve our code. If you know better and more creative way don't hesitate to contact us. Thank you.
  */
 namespace App\Http\Controllers\Manage\Admins;
@@ -58,9 +58,9 @@ class AdminGlobalSearchController extends Controller
     }
 
     public function getParentUrlId($modelPath,$results){
-        if (property_exists(app($modelPath), 'admikoGlobalSearchParent')) {
-            $parent_model = $modelPath::$admikoGlobalSearchParent['parent_model'];
-            $child_parent_id = $modelPath::$admikoGlobalSearchParent['child_parent_id'];
+        if (property_exists(app($modelPath), 'dokreGlobalSearchParent')) {
+            $parent_model = $modelPath::$dokreGlobalSearchParent['parent_model'];
+            $child_parent_id = $modelPath::$dokreGlobalSearchParent['child_parent_id'];
              $modelClass = 'App\Models\Manage\\' . $parent_model;
             $query      = $modelClass::where('id', $results->{$child_parent_id})->first();
             array_unshift($this->getParentId , $query->id);
@@ -69,6 +69,6 @@ class AdminGlobalSearchController extends Controller
     }
 
     public function mergeForGlobalSearch(){
-        return array_merge(config("admiko_global_search"), config("admiko_global_search_custom"));
+        return array_merge(config("dokre_global_search"), config("dokre_global_search_custom"));
     }
 }

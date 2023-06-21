@@ -1,14 +1,42 @@
 @extends("manage.layouts.default")
 @section('breadcrumbs')@endsection
 @section('pageTitle')
-    <h1>{{ trans('admiko.home') }}</h1>
+    <h1>{{ trans('dokre.home') }}</h1>
 @endsection
 @section('pageInfo')@endsection
 @section('backBtn')@endsection
 @section('content')
+@if ((auth()->user()->role_id == 3))
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <h5 class="card-header" style="background-color: rgb(37, 230, 248); padding:0.2em 1rem; font-size:24px"><i class="fas fa-user-circle fa-fw"></i> Halo, {{$pendaftar->nama_siswa}}</h5>
+            <div class="card-body"  style="text-align: left">
+                Pengumuman Hasil: <br>
+                @if($pendaftar->tempat_lahir == NULL or $pendaftar->agama == NULL)
+                    <h3><span style="color:black;">-</span></h3>
+                @elseif ($lolos)
+                    <h3>Selamat, Anda dinyatakan <span style="color:limegreen; ">Lolos</span></h3>
+                @elseif ($tolak)
+                    <h3>Mohon maaf, Anda dinyatakan <span style="color:red; ">Tidak Lolos</span></h3>
+                @else
+                    <h3><span style="color:blue;">Berkas Diterima</span></h3>
+                @endif
+            </div>
+            <div class="card-footer text-muted" style="text-align: left;">
+                @if($pendaftar->tempat_lahir == NULL)
+                <h5 class="warn">Mohon berkas dan data segera dilengkapi. <a href="{{route('manage.pendaftar.index')}}">Klik disini</a></h5>
+                @else
+                <h5 class="info"><span style="color:limegreen">Data sudah lengkap. Terima Kasih</span></h5>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
+@else
 <div class="row">
     <div class="col-sm-4">
-        <di class="card">
+        <div class="card">
             <h5 class="card-header" style="background-color: rgb(37, 230, 248); padding:0.3em 2rem; font-size:24px"><i class="fas fa-child fa-fw"></i> Total Pendaftar</h5>
             <div class="card-body"  style="text-align: center">
                 <h2 class="display-2">{{$pendaftar}}</h2>
@@ -16,7 +44,6 @@
             <div class="card-footer text-muted" style="text-align: center;">
                 <h5>PENDAFTAR</h5>
             </div>
-            <div>
         </div>
     </div>
     <div class="col-sm-4">
@@ -55,7 +82,7 @@
                                 <div class="d-flex justify-content-start justify-content-sm-end">
                                     <div class="searchTable">
                             <div class="input-group ps-2">
-                                <input type="text" name="admiko_search" class="form-control searchTableInput" placeholder="Search" value="">
+                                <input type="text" name="dokre_search" class="form-control searchTableInput" placeholder="Search" value="">
                             </div></div>
                                 </div>
                             </div>
@@ -102,4 +129,5 @@
         </div>
     </div>
 </div>
+@endif
 @endsection

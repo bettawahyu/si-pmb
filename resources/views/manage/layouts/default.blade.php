@@ -6,15 +6,20 @@
     @include('manage.layouts.header_custom_top')
     @include('manage.layouts.header_scripts')
     @include('manage.layouts.header_custom_bottom')
-    <title>Admiko</title>
+    @php
+        use Illuminate\Support\Facades\DB;
+        $logo = DB::table('Sekolah')->first();
+    @endphp
+    <title>Dokre</title>
 </head>
 <body>
 <div class="containerBox">
     <header>
         <nav class="navbar">
-            <div class="navbar-header d-flex justify-content-center align-items-center">
-                <a class="navbar-brand" href="{{route("manage.home")}}">
-                    <img src="{{ asset('assets/admiko/images/logo.png') }}">
+            <div class="navbar-header d-flex justify-content-center align-items-center" style="padding-top:3px; padding-bottom:3px">
+                <a class="navbar-brand" href="{{route("manage.home")}}" >
+                   <img src="{{ asset('upload/logo/'.$logo->logo_sekolah) }}"><br>
+                   {{$logo->nama_sekolah}} <br>
                 </a>
             </div>
             <div class="sidebar">
@@ -31,20 +36,20 @@
                             <div>Menu</div>
                         </div>
                     </li>
-                    <li class="nav-item page{{ $admiko_data['sideBarActive'] === "home" ? " active" : "" }}">
-                        <a class="nav-link" href="{{route("manage.home")}}"><i class="fas fa-home fa-fw"></i>{{ trans('admiko.home') }}</a>
+                    <li class="nav-item page{{ $dokre_data['sideBarActive'] === "home" ? " active" : "" }}">
+                        <a class="nav-link" href="{{route("manage.home")}}"><i class="fas fa-home fa-fw"></i>{{ trans('dokre.home') }}</a>
                     </li>
                     @include('manage.custom_sidebar_top')
                     {{--!!! To prevent overwriting please add your links into custom_sidebar!!!--}}
-                    @include('manage.admiko_sidebar')
+                    @include('manage.dokre_sidebar')
                     {{--!!! To prevent overwriting please add your links into custom_sidebar!!!--}}
                     @include('manage.custom_sidebar_bottom')
-                    @include('manage.layouts.admiko_developer_sidebar')
+                    @include('manage.layouts.dokre_developer_sidebar')
                 </ul>
             </div>
         </nav>
         <footer>
-            <a href="https://admiko.com" target="_blank">&copy; {{date("Y")}} Powered by ADMIKO</a>
+            <a href="https://dokre.com" target="_blank">&copy; {{date("Y")}} Powered by ADMIKO</a>
         </footer>
     </header>
     <div class="main">
@@ -53,10 +58,10 @@
                 <a class="sidebar-toggle d-flex me-2" href="#">
                     <i class="fas fa-bars fa-fw"></i>
                 </a>
-                @if(count(config('admiko_global_search'))>0 || count(config('admiko_global_search_custom'))>0)
-                    <div class="admikoGlobalSearch">
-                        <input name="search" type="text" placeholder="{{ trans('admiko.search') }}" autocomplete="off">
-                        <div class="admikoGlobalSearchResults"></div>
+                @if(count(config('dokre_global_search'))>0 || count(config('dokre_global_search_custom'))>0)
+                    <div class="dokreGlobalSearch">
+                        <input name="search" type="text" placeholder="{{ trans('dokre.search') }}" autocomplete="off">
+                        <div class="dokreGlobalSearchResults"></div>
                     </div>
                 @endif
                 <ul class="navbar-nav ms-auto">
@@ -69,18 +74,18 @@
                             <img src="{{auth()->user()->image}}" class="img-fluid rounded-circle">
                         </a>
                     </li>
-                    <li class="nav-item myaccount{{ $admiko_data['sideBarActive'] === "myaccount" ? " active" : "" }}">
-                        <a class="nav-link" href="{{route("manage.myaccount")}}" title="{{ trans('admiko.myaccount') }}"><i class="fas fa-user fa-fw"></i></a>
+                    <li class="nav-item myaccount{{ $dokre_data['sideBarActive'] === "myaccount" ? " active" : "" }}">
+                        <a class="nav-link" href="{{route("manage.myaccount")}}" title="{{ trans('dokre.myaccount') }}"><i class="fas fa-user fa-fw"></i></a>
                     </li>
                     <li class="nav-item logout">
-                        <a class="nav-link" href="{{route("manage.logout")}}" title="{{ trans('admiko.logout') }}"><i class="fas fa-power-off fa-fw"></i></a>
+                        <a class="nav-link" href="{{route("manage.logout")}}" title="{{ trans('dokre.logout') }}"><i class="fas fa-power-off fa-fw"></i></a>
                     </li>
                 </ul>
             </nav>
         </div>
         <div class="mainBoxBreadcrumb">
             <div class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route("manage.home")}}"><i class="fas fa-home"></i>{{ trans('admiko.home') }}</a></li>
+                <li class="breadcrumb-item"><a href="{{route("manage.home")}}"><i class="fas fa-home"></i>{{ trans('dokre.home') }}</a></li>
                 @yield('breadcrumbs')
             </div>
         </div>

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Manage\Auth\RegisterController;
+use App\Http\Controllers\Dashboard\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -20,3 +22,10 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/',[FrontendController::class,"frontendmenu"])->name("frontend.frontendmenu");
+// Route Dashboard Siswa
+Route::delete("/dashboard/destroy", [DashboardController::class,"destroy"])->name("dashboard.delete");
+Route::resource("/dashboard", DashboardController::class)->parameters(["dashboard" => "dashboard"]);
+// Route Registrasi Siswa
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::post('/register/daftar', [RegisterController::class, 'store'])->name('register.create');
+

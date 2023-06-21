@@ -39,7 +39,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->routes(function () {
             Route::prefix('api')->middleware('api')->namespace($this->namespace)->group(base_path('routes/api.php'));
-            Route::prefix('manage')->name('manage.')->middleware('manage')->group(base_path('routes/admiko_manage.php'));
+            Route::prefix('manage')->name('manage.')->middleware('manage')->group(base_path('routes/dokre_manage.php'));
             Route::middleware('web')->namespace($this->namespace)->group(base_path('routes/web.php'));
         });
     }

@@ -1,15 +1,17 @@
 <?php
-/** Helper for Admiko Login. **/
+/** Helper for Dokre Login. **/
 /**
- * @author     Thank you for using Admiko.com
- * @copyright  2020-2022
- * @link       https://Admiko.com
+ * @author     Thank you for using Duo Kreatif Apps
+ * @copyright  2022-2023
+ * @link       https://duokreatif.com
  * @Help       We are always looking to improve our code. If you know better and more creative way don't hesitate to contact us. Thank you.
  */
 namespace App\Http\Controllers\Manage\Auth;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
+
 
 class LoginController extends Controller
 {
@@ -20,6 +22,7 @@ class LoginController extends Controller
 
     public function index()
     {
+        //
         return view('manage.auth.login', ['title' => 'Admin Login']);
     }
 
@@ -35,7 +38,7 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::guard('admin')->logout();
-        return redirect()->route('manage.login');
+        return redirect()->route('frontend.frontendmenu');
     }
 
     private function validator(Request $request)

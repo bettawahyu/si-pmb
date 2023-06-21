@@ -5,12 +5,12 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Manage\Menu;
+use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
 {
     //
     public function frontendmenu(){
-
         $Menu = Menu::orderBy('id')->get();
         $Beranda = Menu::where('id',1)->first();
         $Tentang = Menu::where('id',2)->first();

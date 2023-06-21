@@ -13,12 +13,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+		
         $this->call(AdminsTableSeeder::class);
         $this->call(AdminsRolesTableSeeder::class);
+        $this->call(AdminsRolesPermissionTableSeeder::class);
         $this->call(AgamaTableSeeder::class);
-        $this->call(KelasTableSeeder::class);
-        $this->call(TahunAjaranTableSeeder::class);
         $this->call(JenisKelaminTableSeeder::class);
+        $this->call(KelasTableSeeder::class);
+        $this->call(MenuTableSeeder::class);
         $this->call(PekerjaanOrangTuaTableSeeder::class);
+        $this->call(PendaftarTableSeeder::class);
+        $this->call(SekolahTableSeeder::class);
+        $this->call(TahunAjaranTableSeeder::class);
+        $this->call(UnggahDokumenTableSeeder::class);
     }
 }

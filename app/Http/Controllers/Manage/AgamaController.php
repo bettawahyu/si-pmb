@@ -1,8 +1,8 @@
 <?php
 /**
- * @author     Thank you for using Admiko.com
- * @copyright  2020-2022
- * @link       https://Admiko.com
+ * @author     Thank you for using Duo Kreatif Apps
+ * @copyright  2022-2023
+ * @link       https://duokreatif.com
  * @Help       We are always looking to improve our code. If you know better and more creative way don't hesitate to contact us. Thank you.
  */
 namespace App\Http\Controllers\Manage;
@@ -20,11 +20,11 @@ class AgamaController extends Controller
         if (Gate::none(['agama_allow', 'agama_edit'])) {
             return redirect(route("manage.home"));
         }
-        $admiko_data['sideBarActive'] = "agama";
-		$admiko_data["sideBarActiveFolder"] = "dropdown_settings";
-        
+        $dokre_data['sideBarActive'] = "agama";
+		$dokre_data["sideBarActiveFolder"] = "dropdown_website";
+
         $tableData = Agama::orderBy("id")->get();
-        return view("manage.agama.index")->with(compact('admiko_data', "tableData"));
+        return view("manage.agama.index")->with(compact('dokre_data', "tableData"));
     }
 
     public function create()
@@ -32,12 +32,12 @@ class AgamaController extends Controller
         if (Gate::none(['agama_allow'])) {
             return redirect(route("manage.agama.index"));
         }
-        $admiko_data['sideBarActive'] = "agama";
-		$admiko_data["sideBarActiveFolder"] = "dropdown_settings";
-        $admiko_data['formAction'] = route("manage.agama.store");
-        
-        
-        return view("manage.agama.manage")->with(compact('admiko_data'));
+        $dokre_data['sideBarActive'] = "agama";
+		$dokre_data["sideBarActiveFolder"] = "dropdown_website";
+        $dokre_data['formAction'] = route("manage.agama.store");
+
+
+        return view("manage.agama.manage")->with(compact('dokre_data'));
     }
 
     public function store(AgamaRequest $request)
@@ -46,9 +46,8 @@ class AgamaController extends Controller
             return redirect(route("manage.agama.index"));
         }
         $data = $request->all();
-        
+
         $Agama = Agama::create($data);
-        
         return redirect(route("manage.agama.index"));
     }
 
@@ -64,13 +63,13 @@ class AgamaController extends Controller
             return redirect(route("manage.agama.index"));
         }
 
-        $admiko_data['sideBarActive'] = "agama";
-		$admiko_data["sideBarActiveFolder"] = "dropdown_settings";
-        $admiko_data['formAction'] = route("manage.agama.update", [$Agama->id]);
-        
-        
+        $dokre_data['sideBarActive'] = "agama";
+		$dokre_data["sideBarActiveFolder"] = "dropdown_website";
+        $dokre_data['formAction'] = route("manage.agama.update", [$Agama->id]);
+
+
         $data = $Agama;
-        return view("manage.agama.manage")->with(compact('admiko_data', 'data'));
+        return view("manage.agama.manage")->with(compact('dokre_data', 'data'));
     }
 
     public function update(AgamaRequest $request,$id)
@@ -81,7 +80,7 @@ class AgamaController extends Controller
         $data = $request->all();
         $Agama = Agama::find($id);
         $Agama->update($data);
-        
+
         return redirect(route("manage.agama.index"));
     }
 
@@ -93,7 +92,7 @@ class AgamaController extends Controller
         Agama::destroy($request->idDel);
         return back();
     }
-    
-    
-    
+
+
+
 }
