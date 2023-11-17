@@ -8,7 +8,7 @@
 @section('pageInfo')
 @endsection
 @section('backBtn')
-<a href="{{route("manage.home")}}"><i class="fas fa-angle-left"></i> {{trans('dokre.page_back_btn')}}</a>
+<a href="{{route("manage.dokumen_pendaftar.index")}}"><i class="fas fa-angle-left"></i> {{trans('dokre.page_back_btn')}}</a>
 @endsection
 @section('content')
 <div class="card pendaftar_index dokreIndex">
@@ -42,9 +42,6 @@
 							<th scope="col" class="text-nowrap">Nama Siswa</th>
                             <th scope="col" class="text-nowrap" data-orderable="false">Lihat Dokumen</th>
                             <th scope="col" class="text-nowrap" data-orderable="false">Upload Dokumen</th>
-                            @if(Gate::allows('pendaftar_allow'))
-                            <th scope="col" class="w-5 no-sort" data-orderable="false">{{trans('dokre.table_delete')}}</th>
-                            @endIf
                         </tr>
                     </thead>
                     <tbody>
@@ -52,13 +49,14 @@
                         <tr>
 							<td class="text-nowrap">{{$data->no_pendaftaran}}</td>
 							<td class="text-nowrap">{{$data->nama_siswa}}</td>
-                            <td class="w-5 no-sort"><a href="{{route("manage.dokumen.detail",[$data->id])}}"><i class="fas fa-eye fa-fw"></i></a></td>
-                            <td class="w-5 no-sort"><a href="{{route("manage.dokumen.upload",[$data->id])}}"><i class="fas fa-upload fa-fw"></i></a></td>
-                            @if(Gate::allows(['pendaftar_allow']))
                             <td class="w-5 no-sort">
-                            <a href="#" data-id="{{$data->id}}" class="dokre_deleteConfirm" data-bs-toggle="modal" data-bs-target="#deleteConfirm"><i class="fas fa-trash fa-fw"></i></a>
-                        </td>
-                            @endIf
+                            @foreach ($tableData as $cek )
+                                @if ($cek->id_pendaftar == $data->id)
+                                <a href="{{route("manage.dokumen.detail",[$data->id])}}"><i class="fas fa-eye fa-fw" style="color:rgb(3, 175, 3);"></i></a>
+                                @endif
+                            @endforeach
+                            </td>
+                            <td class="w-5 no-sort"><a href="{{route("manage.dokumen.upload",[$data->id])}}"><i class="fas fa-upload fa-fw"></i></a></td>
                         </tr>
                     @endforeach
                     </tbody>

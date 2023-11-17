@@ -39,6 +39,7 @@ Route::resource("tahun_ajaran", TahunAjaranController::class)->parameters(["tahu
 Route::delete("dokumen_pendaftar/destroy", [DokumenController::class,"destroy"])->name("dokumen.delete");
 Route::resource("dokumen_pendaftar", DokumenController::class)->parameters(["dokumen" => "dokumen"]);
 Route::get('dokumen_pendaftar/detail/{id}', [DokumenController::class,"detail"])->name("dokumen.detail");
+Route::delete('dokumen_pendaftar/detail/hapus', [DokumenController::class,"hapus"])->name("dokumen.hapus");
 Route::get('dokumen_pendaftar/upload/{id}', [DokumenController::class,"upload"])->name("dokumen.upload");
 /**UnggahDokumen**/
 Route::delete("unggah_dokumen/destroy", [UnggahDokumenController::class,"destroy"])->name("unggah_dokumen.delete");

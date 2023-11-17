@@ -19,14 +19,28 @@ class DokumenController extends Controller
 
     public function index()
     {
-        if (Gate::none(['dokumen_allow', 'dokumen_edit'])) {
+        if (Gate::none(['dokumen_pendaftar_allow', 'dokumen_pendaftar_edit'])) {
             return redirect(route("manage.home"));
         }
+         if (auth()->user()->role_id == 3) {
+            $dokre_data['sideBarActive'] = "dokumen_pendaftar";
+		    $dokre_data["sideBarActiveFolder"] = "dropdown_pendaftaran";
+            $dokre_data["fileInfo"] = Pendaftar::$dokre_file_info;
+            $pendaftar = Pendaftar::where('email', auth()->user()->email)->first();
+            if($pendaftar){
+                // return redirect(route("manage.dokumen_pendaftar.index",[$pendaftar->id]));
+                return redirect(route("manage.dokumen_pendaftar.detail",[$pendaftar->id]));
+            } else {
+
+                return redirect(route("manage.home"));
+            }
+         }
         $dokre_data['sideBarActive'] = "Dokumen";
 		$dokre_data["sideBarActiveFolder"] = "dropdown_pendaftaran";
 
         $peserta = Pendaftar::all();
-        $tableData = Dokumen::orderBy("id")->get();
+        $tableData = Dokumen::orderBy("id")->get()->unique('id_pendaftar');
+        // dd($tableData);
         return view("manage.dokumen_pendaftar.index")->with(compact('dokre_data', 'peserta', "tableData"));
     }
 
@@ -52,13 +66,13 @@ class DokumenController extends Controller
         if($request->hasFile('dokumen'))
         {
             foreach ($request->file('dokumen') as $key=>$dok){
-
+                $doku = rand(100000,999999).".".$dok->getClientOriginalExtension();
                 Dokumen::create([
                     'id_pendaftar' => $request->input('id_pendaftar')[$key],
                     'id_unggah' => $request->input('id_unggah')[$key],
-                    'dokumen' => $dok->getClientOriginalName(),
+                    'dokumen' => $doku,
                 ]);
-                $dok->move(public_path('upload/dokumen'),$dok->getClientOriginalName());
+                $dok->move(public_path('upload/dokumen'),$doku);
             }
         }
         return redirect(route("manage.dokumen_pendaftar.index"));
@@ -102,6 +116,7 @@ class DokumenController extends Controller
         if (Gate::none(['dokumen_allow'])) {
             return redirect(route("manage.dokumen_pendaftar.index"));
         }
+        // dd($request);
         Dokumen::destroy($request->idDel);
         return back();
     }
@@ -130,10 +145,22 @@ class DokumenController extends Controller
         $dokre_data['formAction'] = route("manage.dokumen_pendaftar.store");
 
         $detail = Pendaftar::find($id);
-        //$dokumen = Dokumen::where('id_pendaftar',$id)->get();
         $nama_dok= UnggahDokumen::where('status_aktif','aktif')->get();;
-        // dd($nama_dok);
+        $cekdok = Dokumen::where('id_pendaftar',$id)->first();
+        // dd($cekdok);
+        if ($cekdok == NULL)
+        {
         return view("manage.dokumen_pendaftar.upload")->with(compact('dokre_data', 'detail','nama_dok'));
+        }
+        else
+        {
+        return back()->with('error','Sudah Unggah Berkas, Hapus berkas yang lama.');
+        }
     }
 
+    public function hapus($id)
+    {
+        Dokumen::destroy($id);
+        return back()->with('success','Data berhasil dihapus');
+    }
 }

@@ -8,7 +8,7 @@
 @section('pageInfo')
 @endsection
 @section('backBtn')
-<a href="{{route("manage.home")}}"><i class="fas fa-angle-left"></i> {{trans('dokre.page_back_btn')}}</a>
+<a href="{{route("manage.dokumen_pendaftar.index")}}"><i class="fas fa-angle-left"></i> {{trans('dokre.page_back_btn')}}</a>
 @endsection
 @section('content')
 <div class="card pendaftar_index dokreIndex">

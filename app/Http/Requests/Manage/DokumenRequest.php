@@ -33,9 +33,6 @@ class DokumenRequest extends FormRequest
 			],
             "dokumen"=>[
 				"array",
-				// "max:4112",
-				// "file_extension:jpg,jpeg,png,pdf",
-				// "mimes:jpg,jpeg,png,pdf",
 				"required"
             ],
             // "dokumen"=>[
@@ -44,6 +41,9 @@ class DokumenRequest extends FormRequest
             // ],
 
             "dokumen.*"=>[
+                "max:4112",
+				"file_extension:jpg,jpeg,png,pdf",
+				"mimes:jpg,jpeg,png,pdf",
                 "required",
             ]
         ];

@@ -1,5 +1,5 @@
 {{--IMPORTANT: this page will be overwritten and any change will be lost!! Use custom_sidebar_bottom.blade.php and custom_sidebar_top.blade.php--}}
-@if (auth()->user()->role_id != 3) 
+@if (auth()->user()->role_id != 3)
     @if(Gate::any(['pendaftar_allow','pendaftar_edit','diterima_allow','diterima_edit','ditolak_allow','ditolak_edit']))
     <li class="nav-item dropdown{{ $dokre_data['sideBarActiveFolder'] === "dropdown_pendaftaran" ? " open" : "" }}">
         <a href="#" class="nav-link dropdown-link"><i class="fas fa-id-card fa-fw"></i>Pendaftaran</a>
@@ -32,6 +32,9 @@
 @else
     @if(Gate::any(['pendaftar_allow', 'pendaftar_edit']))
             <li class="nav-item{{ $dokre_data['sideBarActive'] === "pendaftar" ? " active" : "" }}"><a class="nav-link dropdown-item" href="{{route('manage.pendaftar.index')}}"><i class="fas fa-address-book fa-fw"></i>Pendaftar</a></li>
+    @endIf
+    @if(Gate::any(['dokumen_pendaftar_allow', 'dokumen_pendaftar_edit']))
+            <li class="nav-item{{ $dokre_data['sideBarActive'] === "dokumen_pendaftar" ? " active" : "" }}"><a class="nav-link dropdown-item" href="{{route('manage.dokumen_pendaftar.index')}}"><i class="fas fa-archive fa-fw"></i>Dokumen Pendaftar</a></li>
     @endIf
 @endif
 @if (Gate::any(['agama_allow','agama_edit','jenis_kelamin_allow','jenis_kelamin_edit','kelas_allow','kelas_edit','pekerjaan_orang_tua_allow','pekerjaan_orang_tua_edit','tahun_ajaran_allow','tahun_ajaran_edit','unggah_dokumen_allow','unggah_dokumen_edit']))
